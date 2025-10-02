@@ -1,0 +1,53 @@
+<div class="row col-md-10 mx-auto">
+    <h1 class="text-center">Fornecedores Cadastrados</h1>
+    <div class="row mb-3">
+        <label for="filtro" class="col-sm-2 col-form-label fw-bold text-end">Pesquisar:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control mb-3" id="filtro" [formControl]="filtro"
+                placeholder="Digite nome, CNPJ ou telefone" />
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Nome</th>
+                <th scope="col" class="text-center">CNPJ</th>
+                <th scope="col" class="text-center">Telefone</th>
+                <th scope="col" class="text-center">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (fornecedor of fornecedoresPaginados; track fornecedor.id) {
+            <tr>
+                <th scope="row" class="text-center">{{ fornecedor.id }}</th>
+                <td class="text-center">{{ fornecedor.nome }}</td>
+                <td class="text-center">{{ fornecedor.cnpj }}</td>
+                <td class="text-center">{{ fornecedor.fone }}</td>
+                <td class="text-center">
+                    <i class="bi bi-pen edit-icon" (click)="editFornecedor(fornecedor.id!)"></i>
+                    <i class="bi bi-trash mx-2" (click)="deleteFornecedor(fornecedor.id!)"></i>
+                    <i class="bi bi-eye" (click)="viewProdutosFornecedor(fornecedor.id!)" title="Ver produtos"></i>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @if(totalPages > 1){
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="paginaAtual === 1">
+                <a class="page-link" (click)="anterior()">Anterior</a>
+            </li>
+            @for (pagina of paginasArray; track pagina) {
+            <li class="page-item" [class.active]="pagina === paginaAtual">
+                <a class="page-link" (click)="irParaPagina(pagina)">{{ pagina }}</a>
+            </li>
+            }
+            <li class="page-item" [class.disabled]="paginaAtual === totalPages">
+                <a class="page-link" (click)="proxima()">Próxima</a>
+            </li>
+        </ul>
+    </nav>
+    }
+</div>
