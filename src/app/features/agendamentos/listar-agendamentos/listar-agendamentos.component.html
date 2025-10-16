@@ -1,0 +1,119 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Agendamentos cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroAgendamentos" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroAgendamentos"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite cliente, serviço, funcionário ou status"
+        />
+      </div>
+
+      <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando agendamentos...</div>
+
+      <table
+        class="table text-center align-middle tabela-ordenavel"
+        *ngIf="!carregando && agendamentosFiltrados.length > 0; else nenhumAgendamento"
+      >
+        <thead>
+          <tr>
+            <th scope="col" class="col-1"></th>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Serviço</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody cdkDropList [cdkDropListData]="agendamentosFiltrados" (cdkDropListDropped)="aoReordenar($event)">
+          <tr *ngFor="let agendamento of agendamentosFiltrados; let i = index; trackBy: trackById" cdkDrag>
+            <td cdkDragHandle title="Arraste para reordenar">
+              <i class="bi bi-list icone-arrastar"></i>
+            </td>
+            <th scope="row">{{ agendamento.ordem || i + 1 }}</th>
+            <td class="fw-semibold">{{ agendamento.clienteNome }}</td>
+            <td>{{ agendamento.servicoNome }}</td>
+            <td>
+              <span class="pill-badge" [ngClass]="obterClasseStatus(agendamento.status)">{{ agendamento.status }}</span>
+            </td>
+            <td>
+              <i class="bi bi-pen edit-icon me-2" (click)="editarAgendamento(agendamento.id)" title="Editar"></i>
+              <i class="bi bi-trash me-2" (click)="removerAgendamento(agendamento.id)" title="Remover"></i>
+              <i class="bi bi-eye" (click)="mostrarDetalhes(agendamento)" title="Ver detalhes"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #nenhumAgendamento>
+        <div class="lista-feedback">
+          Nenhum agendamento cadastrado.
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="agendamentoSelecionado as agendamentoAtual">
+  <div class="detalhes-backdrop" (click)="fecharDetalhes()"></div>
+  <div
+    class="detalhes-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="detalhesAgendamentoTitulo"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="detalhes-header">
+      <h2 id="detalhesAgendamentoTitulo" class="detalhes-titulo">Detalhes do agendamento</h2>
+      <button type="button" class="btn-close" aria-label="Fechar detalhes" (click)="fecharDetalhes()"></button>
+    </div>
+
+    <div class="detalhes-grid">
+      <div class="detalhe-item">
+        <span class="detalhe-label">Cliente</span>
+        <span class="detalhe-valor">{{ agendamentoAtual.clienteNome }}</span>
+      </div>
+      <div class="detalhe-item">
+        <span class="detalhe-label">Funcionário</span>
+        <span class="detalhe-valor">{{ agendamentoAtual.funcionarioNome }}</span>
+      </div>
+      <div class="detalhe-item">
+        <span class="detalhe-label">Serviço</span>
+        <span class="detalhe-valor">{{ agendamentoAtual.servicoNome }}</span>
+      </div>
+      <div class="detalhe-item">
+        <span class="detalhe-label">Data</span>
+        <span class="detalhe-valor">{{ agendamentoAtual.data | date: 'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="detalhe-item">
+        <span class="detalhe-label">Hora</span>
+        <span class="detalhe-valor">{{ agendamentoAtual.hora || '—' }}</span>
+      </div>
+      <div class="detalhe-item">
+        <span class="detalhe-label">Status</span>
+        <span class="detalhe-valor">
+          <span class="pill-badge" [ngClass]="obterClasseStatus(agendamentoAtual.status)">
+            {{ agendamentoAtual.status }}
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="detalhe-observacoes" *ngIf="agendamentoAtual.observacoes; else semObservacoes">
+      <span class="detalhe-label">Observações</span>
+      <p class="detalhe-texto">{{ agendamentoAtual.observacoes }}</p>
+    </div>
+
+    <ng-template #semObservacoes>
+      <div class="detalhe-observacoes">
+        <span class="detalhe-label">Observações</span>
+        <p class="detalhe-texto text-muted">Nenhuma observação registrada.</p>
+      </div>
+    </ng-template>
+  </div>
+</ng-container>

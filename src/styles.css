@@ -1,0 +1,553 @@
+/* Layout compartilhado para páginas de cadastro */
+
+html {
+	height: 100%;
+}
+
+:root {
+	--layout-header: 64px;
+	--layout-footer: 56px;
+	--surface-page: #f4f6fb;
+	--surface-base: #ffffff;
+	--surface-strong: #f1f3f7;
+	--surface-card: #ffffff;
+	--surface-field: #f8fafc;
+	--text-base: #1f2937;
+	--text-muted: #4b5563;
+	--border-soft: #d1d5db;
+	--accent-strong: #111827;
+	--interactive-muted: rgba(33, 37, 41, 0.35);
+	--shadow-elevated: 0 24px 60px rgba(34, 35, 58, 0.18);
+	--feedback-info-bg: #e7f1ff;
+	--feedback-info-border: #b7d5ff;
+	--feedback-info-text: #0b3d91;
+	--feedback-warning-bg: #fff4e5;
+	--feedback-warning-border: #ffd4a1;
+	--feedback-warning-text: #a15d00;
+	--interactive-base: #212529;
+	--interactive-hover: #0d6efd;
+	--interactive-contrast: #ffffff;
+	--surface-footer: #ffffff;
+	--footer-border: rgba(148, 163, 184, 0.22);
+}
+
+:root.theme-dark {
+	--surface-page: #1e242d;
+	--surface-base: #2a303b;
+	--surface-strong: #343b48;
+	--surface-card: #2f3542;
+	--surface-field: #1f242e;
+	--text-base: #edf2ff;
+	--text-muted: #c3c9d4;
+	--border-soft: rgba(255, 255, 255, 0.16);
+	--accent-strong: #e2e8f0;
+	--interactive-muted: rgba(226, 232, 240, 0.45);
+	--shadow-elevated: 0 24px 60px rgba(0, 0, 0, 0.55);
+	--feedback-info-bg: rgba(147, 197, 253, 0.18);
+	--feedback-info-border: rgba(147, 197, 253, 0.38);
+	--feedback-info-text: #bfdbfe;
+	--feedback-warning-bg: rgba(253, 230, 138, 0.2);
+	--feedback-warning-border: rgba(253, 230, 138, 0.4);
+	--feedback-warning-text: #fcd34d;
+	--interactive-base: #f1f5f9;
+	--interactive-hover: #38bdf8;
+	--interactive-contrast: #0f172a;
+	--surface-footer: #2f3542;
+	--footer-border: rgba(15, 23, 42, 0.8);
+}
+
+body {
+	min-height: 100vh;
+	background-color: var(--surface-page);
+	color: var(--text-base);
+	transition: background-color 0.3s ease, color 0.3s ease;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+app-root {
+	flex: 1;
+	display: flex;
+}
+
+main {
+	background-color: var(--surface-page);
+	color: inherit;
+}
+
+.card {
+	width: 190px;
+	height: 254px;
+	background: var(--surface-base);
+	border-radius: 0.4em;
+	box-shadow: 0.3em 0.3em 0.7em rgba(0, 0, 0, 0.082);
+	border: var(--border-soft) 0.15em solid;
+}
+
+.card:hover {
+	border: var(--accent-strong) 0.15em solid;
+}
+
+.cadastro-page {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: clamp(1.75rem, 4vh, 2.25rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.cadastro-page .cadastro-card {
+	margin: 0 auto;
+}
+
+.cadastro-page--compact {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.cadastro-page--tall {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.cadastro-card {
+	width: min(100%, 680px);
+	height: auto;
+	min-height: 0;
+	padding: clamp(1.75rem, 3.5vw, 2.25rem) clamp(1.75rem, 4vw, 2.5rem);
+	background-color: var(--surface-card) !important;
+	border-radius: 18px;
+	border: 1px solid var(--border-soft);
+	box-shadow: var(--shadow-elevated);
+	color: var(--text-base);
+	transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.cadastro-card--medium {
+	width: min(100%, 840px);
+}
+
+.cadastro-card--wide {
+	width: min(100%, 900px);
+}
+
+.cadastro-titulo {
+	text-align: center;
+	font-weight: 700;
+	font-size: clamp(1.65rem, 3vw, 1.95rem);
+	margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+	color: var(--text-base, #1f2937);
+}
+
+.cadastro-form {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+	gap: clamp(0.875rem, 2vw, 1.25rem);
+	justify-content: center;
+	width: 100%;
+}
+
+.cadastro-form > div:has(textarea),
+.cadastro-form > .cadastro-actions {
+	grid-column: 1 / -1;
+}
+
+/* Layout otimizado para formulários com muitos campos */
+.cadastro-form--compact-grid {
+	grid-template-columns: repeat(2, 1fr);
+	gap: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.cadastro-form--compact-grid > div:has(textarea) {
+	grid-column: 1 / -1;
+	max-width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.cadastro-form--compact-grid > div:has(input[type="file"]) {
+	grid-column: 1 / -1;
+	width: 100%;
+}
+
+.cadastro-form--compact-grid > .cadastro-actions,
+.cadastro-form--compact-grid > .upload-status,
+.cadastro-form--compact-grid > section {
+	grid-column: 1 / -1;
+}
+
+.cadastro-form > div {
+	width: 100%;
+	max-width: 360px;
+	margin-inline: auto;
+}
+
+.cadastro-form > div:has(textarea),
+.cadastro-form > .cadastro-actions {
+	max-width: none;
+}
+
+
+.cadastro-card .form-label {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	margin-bottom: 0.35rem;
+	color: var(--text-base, #374151);
+}
+
+.cadastro-card .form-control,
+.cadastro-card .form-select,
+.cadastro-card textarea {
+	background-color: var(--surface-field);
+	border-radius: 10px;
+	border: 1px solid var(--border-soft, #d1d5db);
+	padding: 0.6rem 0.9rem;
+	font-size: 0.9rem;
+	color: var(--text-base);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+/* INPUT FILE - Ocupar linha toda e remover herança de form-control */
+.cadastro-form--compact-grid input[type="file"].form-control,
+.cadastro-form input[type="file"].form-control,
+.cadastro-card input[type="file"].form-control {
+	grid-column: 1 / -1 !important;
+	width: calc(100% - 0px) !important;
+	min-width: 100% !important;
+	box-sizing: border-box !important;
+	display: block !important;
+	border: 1px solid var(--border-soft) !important;
+	border-radius: 10px !important;
+	padding: 0.6rem 0.9rem !important;
+	font-size: 0.9rem !important;
+	cursor: pointer !important;
+	font-family: inherit !important;
+	transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease !important;
+}
+
+/* Light mode - BRANCO COM TEXTO PRETO */
+:root .cadastro-form--compact-grid input[type="file"].form-control,
+:root .cadastro-form input[type="file"].form-control,
+:root .cadastro-card input[type="file"].form-control {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+	border-color: #d1d5db !important;
+}
+
+:root .cadastro-form--compact-grid input[type="file"].form-control::file-selector-button,
+:root .cadastro-form input[type="file"].form-control::file-selector-button,
+:root .cadastro-card input[type="file"].form-control::file-selector-button {
+	background-color: #d1d5db !important;
+	color: #1f2937 !important;
+	border: none !important;
+	border-radius: 6px !important;
+	padding: 0.4rem 0.8rem !important;
+	margin-right: 0.8rem !important;
+	cursor: pointer !important;
+	font-weight: 600 !important;
+	font-size: 0.85rem !important;
+	transition: background-color 0.2s ease !important;
+}
+
+:root .cadastro-form--compact-grid input[type="file"].form-control::file-selector-button:hover,
+:root .cadastro-form input[type="file"].form-control::file-selector-button:hover,
+:root .cadastro-card input[type="file"].form-control::file-selector-button:hover {
+	background-color: #9ca3af !important;
+}
+
+/* Dark mode - PRETO COM TEXTO BRANCO */
+:root.theme-dark .cadastro-form--compact-grid input[type="file"].form-control,
+:root.theme-dark .cadastro-form input[type="file"].form-control,
+:root.theme-dark .cadastro-card input[type="file"].form-control {
+	background-color: #1f2937 !important;
+	color: #ffffff !important;
+	border-color: #374151 !important;
+}
+
+:root.theme-dark .cadastro-form--compact-grid input[type="file"].form-control::file-selector-button,
+:root.theme-dark .cadastro-form input[type="file"].form-control::file-selector-button,
+:root.theme-dark .cadastro-card input[type="file"].form-control::file-selector-button {
+	background-color: #374151 !important;
+	color: #f3f4f6 !important;
+	border: none !important;
+	border-radius: 6px !important;
+	padding: 0.4rem 0.8rem !important;
+	margin-right: 0.8rem !important;
+	cursor: pointer !important;
+	font-weight: 600 !important;
+	font-size: 0.85rem !important;
+	transition: background-color 0.2s ease !important;
+}
+
+:root.theme-dark .cadastro-form--compact-grid input[type="file"].form-control::file-selector-button:hover,
+:root.theme-dark .cadastro-form input[type="file"].form-control::file-selector-button:hover,
+:root.theme-dark .cadastro-card input[type="file"].form-control::file-selector-button:hover {
+	background-color: #4b5563 !important;
+}
+
+.form-text {
+	color: var(--text-muted) !important;
+}
+
+.text-danger {
+	color: #ef4444 !important;
+}
+
+.cadastro-card .form-control:focus,
+.cadastro-card .form-select:focus,
+.cadastro-card textarea:focus {
+	border-color: var(--accent-strong);
+	box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.25);
+	outline: none;
+}
+
+.cadastro-card .form-control::placeholder,
+.cadastro-card textarea::placeholder {
+	color: var(--text-muted);
+	opacity: 0.75;
+}
+
+.cadastro-card textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+.cadastro-actions {
+	display: flex;
+	justify-content: center;
+	gap: 0.875rem;
+	flex-wrap: wrap;
+	margin-top: 0.75rem;
+}
+
+.cadastro-actions .btn {
+	min-width: 108px;
+	padding: 0.5rem 1.1rem;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 0.875rem;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.upload-status {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	font-weight: 500;
+	font-size: 0.8rem;
+	grid-column: 1 / -1;
+}
+
+.upload-status i {
+	font-size: 1rem;
+}
+
+.pequeno {
+	font-size: 0.75rem;
+	margin-top: 0.2rem;
+}
+
+.preview-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 0.75rem;
+	grid-column: 1 / -1;
+}
+
+.foto-preview {
+	width: 132px;
+	height: 132px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid var(--border-soft, #e5e7eb);
+	background-color: var(--surface-strong, #f9fafb);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tabela-ordenavel {
+	width: 100%;
+	table-layout: auto;
+}
+
+.tabela-ordenavel th,
+.tabela-ordenavel td {
+	vertical-align: middle;
+}
+
+.icone-arrastar {
+	font-size: 1.5rem;
+	cursor: grab;
+}
+
+.edit-icon,
+.bi-trash,
+.bi-eye {
+	cursor: pointer;
+	font-size: 1.1rem;
+}
+
+.pill-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.35rem 0.75rem;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	background-color: var(--surface-strong, #f8f9fa);
+	color: var(--text-base, #1f2937);
+	border: 1px solid var(--border-soft, #e5e7eb);
+}
+
+.pill-badge::before {
+	content: '';
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.4rem;
+	border-radius: 50%;
+	background-color: currentColor;
+	opacity: 0.7;
+	flex-shrink: 0;
+}
+
+/* Listagens compartilhadas */
+
+.list-page {
+	width: 100%;
+}
+
+.list-page .titulo-lista {
+	margin: 0;
+	font-weight: 700;
+	font-size: clamp(2rem, 3.2vw, 2.4rem);
+	color: var(--text-base);
+}
+
+.list-page .filtro-lista {
+	margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.list-page .filtro-lista .form-control {
+	border-radius: 10px;
+	padding: 0.6rem 0.9rem;
+	background-color: var(--surface-base);
+	color: var(--text-base);
+	border: 1px solid var(--border-soft);
+	transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.list-page .filtro-lista .form-control::placeholder {
+	color: var(--text-muted);
+	opacity: 0.7;
+}
+
+.lista-feedback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 100%;
+	padding: 0.6rem 0.9rem;
+	margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+	border-radius: 10px;
+	border: 1px solid var(--border-soft, #d1d5db);
+	background-color: var(--surface-strong, #f8f9fa);
+	color: var(--text-muted, #4b5563);
+	font-size: 0.95rem;
+}
+
+.lista-feedback:last-child {
+	margin-bottom: 0;
+}
+
+.lista-feedback--info {
+	background-color: var(--feedback-info-bg);
+	border-color: var(--feedback-info-border);
+	color: var(--feedback-info-text);
+}
+
+.lista-feedback--warning {
+	background-color: var(--feedback-warning-bg);
+	border-color: var(--feedback-warning-border);
+	color: var(--feedback-warning-text);
+}
+
+tbody tr.cdk-drag-preview {
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+	background-color: var(--surface-strong);
+}
+
+tbody tr.cdk-drag-placeholder {
+	visibility: hidden;
+}
+
+tbody tr {
+	transition: box-shadow 0.2s ease;
+}
+
+tbody tr:hover {
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.table {
+	color: var(--text-base) !important;
+	background-color: var(--surface-base);
+	border-color: var(--border-soft);
+}
+
+.table thead th {
+	background-color: var(--surface-strong);
+	color: var(--text-base) !important;
+	border-color: var(--border-soft);
+}
+
+.table tbody td,
+.table tbody th {
+	background-color: var(--surface-base);
+	border-color: var(--border-soft);
+	color: var(--text-base) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) > * {
+	background-color: var(--surface-strong);
+}
+
+.table-hover tbody tr:hover > * {
+	background-color: rgba(59, 130, 246, 0.12);
+}
+
+@media (max-width: 575.98px) {
+	.cadastro-page {
+		padding: 1.5rem;
+	}
+
+	.cadastro-card {
+		padding: 1.5rem 1.75rem;
+		border-radius: 12px;
+	}
+
+	.cadastro-form {
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+	}
+
+	.cadastro-actions .btn {
+		min-width: 96px;
+		padding: 0.45rem 1rem;
+		font-size: 0.82rem;
+	}
+
+	.foto-preview {
+		width: 108px;
+		height: 108px;
+	}
+}
+/* You can add global styles to this file, and also import other style files */

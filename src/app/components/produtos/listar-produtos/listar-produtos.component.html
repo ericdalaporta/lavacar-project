@@ -1,0 +1,59 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Produtos cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroProdutos" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroProdutos"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite nome do produto ou fornecedor"
+        />
+      </div>
+
+      <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando produtos...</div>
+
+      <table
+        class="table text-center align-middle tabela-ordenavel"
+        *ngIf="!carregando && produtosFiltrados.length > 0; else nenhumProduto"
+      >
+        <thead>
+          <tr>
+            <th scope="col" class="col-1"></th>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Fornecedor</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody cdkDropList [cdkDropListData]="produtosFiltrados" (cdkDropListDropped)="aoReordenar($event)">
+          <tr *ngFor="let produto of produtosFiltrados; let i = index; trackBy: trackById" cdkDrag>
+            <td cdkDragHandle title="Arraste para reordenar">
+              <i class="bi bi-list icone-arrastar"></i>
+            </td>
+            <th scope="row">{{ produto.ordem || i + 1 }}</th>
+            <td class="fw-semibold">{{ produto.nome }}</td>
+            <td>{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td>{{ produto.fornecedorNome }}</td>
+            <td>
+              <i class="bi bi-pen edit-icon" (click)="editProduto(produto.id!)" title="Editar"></i>
+              <i class="bi bi-trash mx-2" (click)="deleteProduto(produto.id!)" title="Remover"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #nenhumProduto>
+        <div class="lista-feedback">
+          Nenhum produto cadastrado.
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

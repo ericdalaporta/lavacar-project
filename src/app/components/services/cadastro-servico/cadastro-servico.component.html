@@ -1,0 +1,87 @@
+<section class="cadastro-page cadastro-page--compact">
+  <div class="card cadastro-card cadastro-card--wide">
+    <h1 class="cadastro-titulo">{{ tituloPagina }}</h1>
+    <form [formGroup]="formServico" (ngSubmit)="salvarServico()" novalidate class="cadastro-form cadastro-form--compact-grid">
+      <div class="descricao-wrapper">
+        <div>
+          <label class="form-label" for="nome">Nome do Serviço</label>
+          <input id="nome" type="text" class="form-control" formControlName="nome" placeholder="Informe o nome" />
+          <div class="text-danger pequeno" *ngIf="obterControle('nome')?.invalid && obterControle('nome')?.touched">
+            Informe um nome válido para o serviço.
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label" for="descricao">Descrição</label>
+          <textarea
+            id="descricao"
+            class="form-control"
+            formControlName="descricao"
+            rows="3"
+            maxlength="150"
+            placeholder="Detalhe o serviço de forma objetiva (máx. 150 caracteres)"
+          ></textarea>
+          <div class="text-end pequeno mt-1">
+            {{ contarCaracteresDescricao() }}/150
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="preco">Preço</label>
+        <input id="preco" type="number" class="form-control" formControlName="preco" placeholder="0,00" min="0" step="0.01" />
+        <div class="text-danger pequeno" *ngIf="obterControle('preco')?.invalid && obterControle('preco')?.touched">
+          Informe um valor válido para o serviço.
+        </div>
+      </div>
+
+      <section class="selecao-produtos">
+        <h2 class="subtitulo-card">Selecione os Produtos para o Serviço</h2>
+        <div class="listas-container">
+          <div class="lista-wrapper">
+            <h3 class="titulo-lista">Produtos Disponíveis</h3>
+            <div
+              id="produtos-disponiveis"
+              cdkDropList
+              #listaDisponiveis="cdkDropList"
+              [cdkDropListData]="produtosDisponiveis"
+              [cdkDropListConnectedTo]="[listaSelecionados]"
+              (cdkDropListDropped)="aoOrganizarProdutos($event)"
+              class="lista-produtos"
+            >
+              <p class="texto-vazio" *ngIf="produtosDisponiveis.length === 0">Nenhum produto disponível.</p>
+              <div class="item-produto" *ngFor="let produto of produtosDisponiveis" cdkDrag>
+                <span class="nome-produto">{{ produto.nome }}</span>
+                <span class="valor">{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lista-wrapper">
+            <h3 class="titulo-lista">Produtos Selecionados</h3>
+            <div
+              id="produtos-selecionados"
+              cdkDropList
+              #listaSelecionados="cdkDropList"
+              [cdkDropListData]="produtosSelecionados"
+              [cdkDropListConnectedTo]="[listaDisponiveis]"
+              (cdkDropListDropped)="aoOrganizarProdutos($event)"
+              class="lista-produtos"
+            >
+              <p class="texto-vazio" *ngIf="produtosSelecionados.length === 0">Arraste os produtos desejados para cá.</p>
+              <div class="item-produto" *ngFor="let produto of produtosSelecionados" cdkDrag>
+                <span class="nome-produto">{{ produto.nome }}</span>
+                <span class="valor">{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="cadastro-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="formServico.invalid">Salvar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="limparFormulario()">Limpar</button>
+      </div>
+    </form>
+  </div>
+</section>

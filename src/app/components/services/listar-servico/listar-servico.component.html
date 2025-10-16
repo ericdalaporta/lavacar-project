@@ -1,0 +1,45 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Serviços cadastrados</h1>
+      <table class="table text-center align-middle tabela-ordenavel" *ngIf="servicos.length > 0; else nenhumServico">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servico of servicos; trackBy: trackById">
+          <th scope="row">{{ servico.id }}</th>
+          <td>{{ servico.nome }}</td>
+          <td>{{ servico.descricao }}</td>
+          <td>{{ servico.preco }}</td>
+          <td>
+            <i
+              class="bi bi-pen text-dark"
+              style="font-size: 1.2rem; cursor: pointer;"
+              (click)="editarServico(servico.id!)"
+              title="Editar"
+            ></i>
+            <i
+              class="bi bi-trash text-dark mx-2"
+              style="font-size: 1.2rem; cursor: pointer;"
+              (click)="excluirServico(servico.id!)"
+              title="Excluir"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+      <ng-template #nenhumServico>
+        <div class="lista-feedback">
+          Nenhum serviço cadastrado.
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

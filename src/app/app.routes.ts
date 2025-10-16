@@ -1,0 +1,41 @@
+import { Routes } from '@angular/router';
+import { CadastroFornecedorComponent } from './components/fornecedores/cadastro-fornecedor/cadastro-fornecedor.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListarFornecedorComponent } from './components/fornecedores/listar-fornecedor/listar-fornecedor.component';
+import { CadastroProdutoComponent } from './components/produtos/cadastro-produto/cadastro-produto.component';
+import { ListarProdutosComponent } from './components/produtos/listar-produtos/listar-produtos.component';
+import { ListarProdutosFornecedorComponent } from './components/fornecedores/listar-produtos-fornecedor/listar-produtos-fornecedor.component';
+import { CadastroServicoComponent } from './components/services/cadastro-servico/cadastro-servico.component';
+import { CadastroClienteComponent } from './features/clientes/cadastro-cliente/cadastro-cliente.component';
+import { ListarClientesComponent } from './features/clientes/listar-clientes/listar-clientes.component';
+import { CadastroFuncionarioComponent } from './features/funcionarios/cadastro-funcionario/cadastro-funcionario.component';
+import { ListarFuncionariosComponent } from './features/funcionarios/listar-funcionarios/listar-funcionarios.component';
+import { ListarServicosDragDropComponent } from './features/servicos/listar-servicos/listar-servicos.component';
+import { CadastroAgendamentoComponent } from './features/agendamentos/cadastro-agendamento/cadastro-agendamento.component';
+import { ListarAgendamentosComponent } from './features/agendamentos/listar-agendamentos/listar-agendamentos.component';
+
+export const routes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'agendamentos/listar-agendamentos', component: ListarAgendamentosComponent },
+    { path: 'agendamentos/cadastro-agendamento', component: CadastroAgendamentoComponent },
+    { path: 'agendamentos/cadastro-agendamento/:id', component: CadastroAgendamentoComponent },
+    { path: 'agendamentos/editar/:id', component: CadastroAgendamentoComponent },
+    { path: 'fornecedores/cadastro-fornecedor', component: CadastroFornecedorComponent },
+    { path: 'fornecedores/listar-fornecedores', component: ListarFornecedorComponent },
+    { path: 'fornecedores/editar-fornecedor/:id', component: CadastroFornecedorComponent },
+    { path: 'produtos/cadastro-produto', component: CadastroProdutoComponent },
+    { path: 'produtos/listar-produtos', component: ListarProdutosComponent },
+    { path: 'produtos/editar-produto/:id', component: CadastroProdutoComponent },
+    { path: 'fornecedor/:id/produtos', component: ListarProdutosFornecedorComponent },
+    { path: 'servicos/cadastro-servico', component: CadastroServicoComponent },
+    { path: 'servicos/editar-servico/:id', component: CadastroServicoComponent },
+    { path: 'clientes/listar-clientes', component: ListarClientesComponent },
+    { path: 'clientes/cadastro-cliente', component: CadastroClienteComponent },
+    { path: 'clientes/cadastro-cliente/:id', component: CadastroClienteComponent },
+    { path: 'clientes/editar/:id', component: CadastroClienteComponent },
+    { path: 'funcionarios/listar-funcionarios', component: ListarFuncionariosComponent },
+    { path: 'funcionarios/cadastro-funcionario', component: CadastroFuncionarioComponent },
+    { path: 'funcionarios/cadastro-funcionario/:id', component: CadastroFuncionarioComponent },
+    { path: 'funcionarios/editar/:id', component: CadastroFuncionarioComponent },
+    { path: 'servicos/listar-servicos', component: ListarServicosDragDropComponent }
+];

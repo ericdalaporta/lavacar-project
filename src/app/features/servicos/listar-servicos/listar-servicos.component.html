@@ -1,0 +1,70 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Serviços cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroServicos" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroServicos"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite nome, descrição ou produto vinculado"
+        />
+      </div>
+
+  <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando serviços...</div>
+
+      <table
+        class="table text-center align-middle tabela-ordenavel"
+        *ngIf="!carregando && servicosFiltrados.length > 0; else nenhumServico"
+      >
+        <thead>
+          <tr>
+            <th scope="col" class="col-1"></th>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Produtos</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody cdkDropList [cdkDropListData]="servicosFiltrados" (cdkDropListDropped)="aoReordenar($event)">
+          <tr *ngFor="let servico of servicosFiltrados; let i = index; trackBy: trackById" cdkDrag>
+            <td cdkDragHandle title="Arraste para reordenar">
+              <i class="bi bi-list icone-arrastar"></i>
+            </td>
+            <th scope="row">{{ servico.ordem || i + 1 }}</th>
+            <td class="texto-nome">{{ servico.nome }}</td>
+            <td class="descricao-coluna">{{ servico.descricao || '—' }}</td>
+            <td>{{ obterPreco(servico) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            <td class="produtos-coluna">
+              <div class="produtos-wrapper" *ngIf="servico.produtos.length; else semProdutos">
+                <span class="pill-badge produtos-badge" *ngFor="let produto of servico.produtos">
+                  {{ produto.nome }}
+                </span>
+              </div>
+              <ng-template #semProdutos>
+                <span class="text-muted">Sem produtos vinculados</span>
+              </ng-template>
+            </td>
+            <td class="acoes-coluna">
+              <div class="acoes-wrapper">
+                <i class="bi bi-pen edit-icon" (click)="editarServico(servico.id)" title="Editar"></i>
+                <i class="bi bi-trash" (click)="excluirServico(servico.id)" title="Remover"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #nenhumServico>
+        <div class="lista-feedback">
+          Nenhum serviço cadastrado.
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

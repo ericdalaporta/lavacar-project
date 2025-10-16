@@ -1,0 +1,41 @@
+<div class="container py-4">
+    <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xxl-8 list-page">
+            <h1 class="titulo-lista text-center">Produtos de {{ nomeFornecedor }}</h1>
+
+            <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando produtos...</div>
+
+            <table
+                class="table text-center align-middle tabela-ordenavel"
+                *ngIf="!carregando && produtos.length > 0; else nenhumProduto"
+            >
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-1"></th>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody cdkDropList [cdkDropListData]="produtos" (cdkDropListDropped)="aoReordenar($event)">
+                    <tr *ngFor="let produto of produtos; let i = index; trackBy: trackById" cdkDrag>
+                        <td cdkDragHandle title="Arraste para reordenar">
+                            <i class="bi bi-list icone-arrastar"></i>
+                        </td>
+                        <th scope="row">{{ produto.ordem || i + 1 }}</th>
+                        <td class="fw-semibold">{{ produto.nome }}</td>
+                        <td>{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+                        <td>{{ produto.quantidade }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ng-template #nenhumProduto>
+                <div class="lista-feedback">
+                    O fornecedor não possui produtos cadastrados.
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

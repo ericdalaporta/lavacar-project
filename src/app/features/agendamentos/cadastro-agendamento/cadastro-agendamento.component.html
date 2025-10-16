@@ -1,0 +1,72 @@
+<section class="cadastro-page cadastro-page--compact">
+  <div class="card cadastro-card cadastro-card--medium">
+    <h1 class="cadastro-titulo">{{ tituloPagina }}</h1>
+    <form [formGroup]="formAgendamento" (ngSubmit)="salvarAgendamento()" novalidate class="cadastro-form cadastro-form--compact-grid">
+      <div>
+        <label class="form-label" for="clienteId">Cliente</label>
+        <select id="clienteId" class="form-select" formControlName="clienteId">
+          <option [ngValue]="null" disabled>Selecione um cliente</option>
+          <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</option>
+        </select>
+        <div class="text-danger pequeno" *ngIf="obterControle('clienteId')?.invalid && obterControle('clienteId')?.touched">
+          Selecione um cliente.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="funcionarioId">Funcionário</label>
+        <select id="funcionarioId" class="form-select" formControlName="funcionarioId">
+          <option [ngValue]="null" disabled>Selecione um funcionário</option>
+          <option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{ funcionario.nome }}</option>
+        </select>
+        <div class="text-danger pequeno" *ngIf="obterControle('funcionarioId')?.invalid && obterControle('funcionarioId')?.touched">
+          Selecione um funcionário.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="servicoId">Serviço</label>
+        <select id="servicoId" class="form-select" formControlName="servicoId">
+          <option [ngValue]="null" disabled>Selecione um serviço</option>
+          <option *ngFor="let servico of servicos" [value]="servico.id">{{ servico.nome }}</option>
+        </select>
+        <div class="text-danger pequeno" *ngIf="obterControle('servicoId')?.invalid && obterControle('servicoId')?.touched">
+          Selecione um serviço.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="data">Data</label>
+        <input id="data" type="date" class="form-control" formControlName="data" />
+        <div class="text-danger pequeno" *ngIf="obterControle('data')?.invalid && obterControle('data')?.touched">
+          Informe a data do agendamento.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="hora">Hora</label>
+        <input id="hora" type="time" class="form-control" formControlName="hora" />
+        <div class="text-danger pequeno" *ngIf="obterControle('hora')?.invalid && obterControle('hora')?.touched">
+          Informe a hora do agendamento.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="status">Status</label>
+        <select id="status" class="form-select" formControlName="status">
+          <option *ngFor="let status of statusAgendamento" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label" for="observacoes">Observações</label>
+        <textarea id="observacoes" rows="3" class="form-control" formControlName="observacoes" placeholder="Detalhes adicionais"></textarea>
+      </div>
+
+      <div class="cadastro-actions">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="limparFormulario()">Limpar</button>
+      </div>
+    </form>
+  </div>
+</section>

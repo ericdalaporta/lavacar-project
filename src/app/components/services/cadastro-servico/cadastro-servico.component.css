@@ -1,0 +1,135 @@
+.pequeno {
+	font-size: 0.85rem;
+	color: #ffffff;
+}
+
+.descricao-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(0.75rem, 1.5vw, 1rem);
+	grid-column: 1;
+	grid-row: 1 / span 2;
+}
+
+.descricao-wrapper > div:first-child {
+	display: flex;
+	flex-direction: column;
+}
+
+.descricao-wrapper > div:last-child {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.descricao-wrapper textarea {
+	flex: 1;
+	display: flex;
+}
+
+.descricao-wrapper .text-end {
+	color: #ffffff !important;
+	margin-top: auto !important;
+}
+
+.selecao-produtos {
+	grid-column: 1 / -1;
+	margin-top: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--border-soft, #e5e7eb);
+	width: 100% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.subtitulo-card {
+	text-align: center;
+	margin-bottom: 2rem;
+	font-weight: 700;
+	font-size: 1.25rem;
+	color: var(--text-base, #1f2937);
+	width: 100%;
+}
+
+.listas-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+	max-width: 850px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.lista-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.titulo-lista {
+	text-align: center;
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--text-base, #374151);
+}
+
+.lista-produtos {
+	min-height: 280px;
+	border: 2px dashed var(--border-soft, #d1d5db);
+	border-radius: 12px;
+	padding: 1.25rem;
+	background-color: var(--surface-base, #ffffff);
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	transition: border-color 0.2s ease;
+}
+
+.lista-produtos:hover {
+	border-color: var(--text-muted, #9ca3af);
+}
+
+.item-produto {
+	background-color: var(--surface-strong, #f9fafb);
+	border: 1px solid var(--border-soft, #e5e7eb);
+	border-radius: 8px;
+	padding: 0.875rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	cursor: grab;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.item-produto:hover {
+	background-color: var(--surface-base, #ffffff);
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.item-produto:active {
+	cursor: grabbing;
+	transform: scale(0.98);
+	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.nome-produto {
+	font-weight: 500;
+	color: var(--text-base, #1f2937);
+}
+
+.texto-vazio {
+	text-align: center;
+	color: var(--text-muted, #6b7280);
+	margin: auto 0;
+	font-style: italic;
+}
+
+.valor {
+	color: #3b82f6;
+	font-weight: 600;
+	font-size: 0.9375rem;
+}

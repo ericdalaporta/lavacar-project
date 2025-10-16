@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.texto-nome {
+  font-weight: 600;
+}
+
+.descricao-coluna {
+  word-break: break-word;
+  white-space: normal;
+}
+
+.produtos-coluna {
+  text-align: center;
+  min-width: 200px;
+}
+
+.produtos-wrapper {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.produtos-badge {
+  border-color: var(--border-soft, #e5e7eb);
+  color: var(--text-muted, #4b5563);
+  font-weight: 500;
+}
+
+.acoes-coluna {
+  width: 120px;
+}
+
+.acoes-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
