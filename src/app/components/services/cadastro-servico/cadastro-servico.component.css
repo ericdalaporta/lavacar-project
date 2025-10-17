@@ -1,6 +1,6 @@
 .pequeno {
 	font-size: 0.85rem;
-	color: #ffffff;
+	color: var(--text-muted);
 }
 
 .descricao-wrapper {
@@ -28,7 +28,7 @@
 }
 
 .descricao-wrapper .text-end {
-	color: #ffffff !important;
+	color: var(--text-muted) !important;
 	margin-top: auto !important;
 }
 
