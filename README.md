@@ -1,111 +1,171 @@
 # 🚗 LavaCar - Sistema de Gerenciamento de Lava-Car
 
-[![Angular](https://img.shields.io/badge/Angular-19.1.0-red?style=for-the-badge&logo=angular)](https://angular.io/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-purple?style=for-the-badge&logo=bootstrap)](https://getbootstrap.com/)
-[![Dexie](https://img.shields.io/badge/Dexie-4.2.0-green?style=for-the-badge&logo=database)](https://dexie.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-
-## 📺 Demonstração
-
-![LavaCar Demo](./src/assets/img/demo-readme.gif)
+> **Sistema moderno e completo para gerenciamento de lava-car**, desenvolvido em **Angular 19** com **IndexedDB**. Gerencie clientes, funcionários, agendamentos, produtos, fornecedores e serviços com uma interface intuitiva e responsiva.
 
 ---
 
-## 📋 Sobre o Projeto
+## 📊 Índice
 
-**LavaCar** é um sistema web completo e moderno desenvolvido em **Angular 19** para gerenciamento de lava-car. O projeto oferece uma solução integrada para controlar todos os aspectos operacionais de um negócio de lavagem de veículos, desde o cadastro de clientes até o agendamento de serviços.
-
-### ✨ Características Principais
-
-- 👥 **Gerenciamento de Clientes** - Cadastro, edição e exclusão de clientes
-- 👨‍💼 **Gestão de Funcionários** - Controle de equipe com dados de admissão
-- 🏢 **Cadastro de Fornecedores** - Gerenciamento de fornecedores de produtos
-- 📦 **Controle de Produtos** - Inventário de produtos com vinculação a fornecedores
-- 🛠️ **Serviços Oferecidos** - Catálogo de serviços com precificação
-- 📅 **Sistema de Agendamentos** - Marcação de serviços com rastreamento de status
-- 🎨 **Tema Claro/Escuro** - Interface adaptável ao gosto do usuário
-- 🔒 **Armazenamento Local** - Dados persistidos com IndexedDB (sem servidor)
-- ✅ **Validação em Tempo Real** - Formulários com feedback imediato
-- 📱 **Design Responsivo** - Interface adaptada para desktop, tablet e mobile
+1. [Visão Geral](#visão-geral)
+2. [Recursos Principais](#recursos-principais)
+3. [Stack Tecnológico](#-stack-tecnológico)
+4. [Pré-requisitos](#pré-requisitos)
+5. [Instalação](#instalação)
+6. [Como Usar](#como-usar)
+7. [Estrutura do Projeto](#estrutura-do-projeto)
+8. [Arquitetura](#arquitetura)
+9. [Modelos de Dados](#modelos-de-dados)
+10. [Serviços](#serviços)
+11. [Contribuindo](#contribuindo)
+12. [Licença](#licença)
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## 🎯 Visão Geral
 
-| Tecnologia | Versão | Descrição |
-|------------|--------|-----------|
-| **Angular** | 19.1.0 | Framework JavaScript para construção de SPAs |
-| **TypeScript** | 5.7.2 | Superset do JavaScript com tipos estáticos |
-| **Bootstrap** | 5.3.8 | Framework CSS para design responsivo |
-| **Bootstrap Icons** | 1.13.1 | Biblioteca de ícones |
-| **Dexie** | 4.2.0 | Wrapper para IndexedDB - banco de dados local |
-| **SweetAlert2** | 11.23.0 | Alertas e diálogos modais elegantes |
-| **RxJS** | 7.8.0 | Programação reativa em JavaScript |
-| **Angular CDK** | 19.1.0 | Material componentes e utilidades |
+O **LavaCar** é uma aplicação web progressiva (PWA) desenvolvida para simplificar o gerenciamento completo de um lava-car. Com foco em usabilidade e eficiência, permite:
+
+- ✅ **Gerenciar Clientes**: Cadastro, edição e acompanhamento de clientes
+- ✅ **Controlar Agendamentos**: Sistema completo com validação de conflitos
+- ✅ **Administrar Funcionários**: Gestão de equipe e atribuição de serviços
+- ✅ **Gerenciar Serviços**: Criar e associar produtos aos serviços
+- ✅ **Controlar Produtos**: Estoque e fornecedores integrados
+- ✅ **Offline-First**: Funciona sem internet com sincronização automática
+
+---
+
+## ✨ Recursos Principais
+
+| Recurso | Descrição |
+|---------|-----------|
+| 🗓️ **Agendamentos** | Sistema completo com calendário, validação de horários e status em tempo real |
+| 👥 **Clientes** | Cadastro com foto, telefone, email e histórico de agendamentos |
+| 👨‍💼 **Funcionários** | Gerenciamento de equipe com função e data de admissão |
+| 🔧 **Serviços** | Criação de serviços com preço e produtos associados |
+| 📦 **Produtos** | Controle de estoque com fornecedores e preços |
+| 🤝 **Fornecedores** | Gestão de parceiros e seus produtos |
+| 📱 **Responsive** | Funciona perfeitamente em desktop, tablet e mobile |
+| 🌙 **Temas** | Suporte a tema claro e escuro |
+| 📴 **Offline** | Funciona completamente offline com IndexedDB |
+
+---
+
+## 📚 Stack Tecnológico
+
+### Frontend
+| Tecnologia | Versão | Função |
+|-----------|--------|--------|
+| **Angular** | 19.1.0 | Framework principal |
+| **TypeScript** | 5.7.2 | Linguagem de desenvolvimento |
+| **Bootstrap** | 5.3.8 | Styling e componentes UI |
+| **Bootstrap Icons** | 1.13.1 | Ícones da interface |
+
+### Bibliotecas
+| Biblioteca | Versão | Função |
+|-----------|--------|--------|
+| **Dexie** | 4.2.0 | Wrapper do IndexedDB |
+| **SweetAlert2** | 11.23.0 | Alertas e confirmações |
+| **Angular CDK** | 19.1.0 | Drag & Drop e utilities |
+| **RxJS** | 7.8.0 | Programação reativa |
+
+### Ferramentas
+| Ferramenta | Função |
+|-----------|--------|
+| **Angular CLI** | 19.1.7 | Ferramentas de build |
+| **Karma** | Testes unitários |
+| **Jasmine** | Framework de testes |
 
 ---
 
 ## 📋 Pré-requisitos
 
-Antes de iniciar, certifique-se de ter instalado:
+Antes de começar, verifique se você tem instalado:
 
-- **Node.js** (versão 18 ou superior)
-- **npm** (geralmente incluído com Node.js)
-- **Git** (para clonar o repositório)
-- Um navegador moderno (Chrome, Firefox, Safari ou Edge)
+- **Node.js** 18+ ([Download](https://nodejs.org/))
+- **npm** 9+ (instalado com Node.js)
+- **Git** ([Download](https://git-scm.com/))
 
-Verifique suas versões:
+### Verificar Instalação
+
 ```bash
-node --version
-npm --version
+node --version    # v18.0.0 ou superior
+npm --version     # 9.0.0 ou superior
+git --version     # git version 2.x.x
 ```
 
 ---
 
-## 🔧 Instalação
+## 🚀 Instalação
 
-### 1️⃣ Clone o Repositório
+### 1. Clone o Repositório
 
 ```bash
 git clone https://github.com/ericdalaporta/lavacar-project.git
 cd lavacar-project
 ```
 
-### 2️⃣ Instale as Dependências
+### 2. Instale as Dependências
 
 ```bash
 npm install
 ```
 
-### 3️⃣ Inicie o Servidor de Desenvolvimento
+### 3. Inicie o Servidor de Desenvolvimento
 
 ```bash
 npm start
 ```
 
-O projeto será aberto automaticamente em `http://localhost:4200/`
+A aplicação estará disponível em: **http://localhost:4200**
+
+### 4. (Opcional) Build para Produção
+
+```bash
+npm run build
+```
+
+Os arquivos compilados serão gerados em `dist/lavacar-project/`
 
 ---
 
-## 📝 Scripts Disponíveis
+## 💻 Como Usar
 
-```bash
-# 🚀 Iniciar servidor de desenvolvimento
-npm start
+### Primeira Execução
 
-# 🏗️ Build para produção
-npm run build
+1. Abra http://localhost:4200
+2. Você verá a **página inicial (Home)** com um painel de navegação
+3. Clique no menu para acessar as diferentes seções
 
-# 👀 Build com watch (recompila ao detectar mudanças)
-npm run watch
+### Fluxo Principal
 
-# 🧪 Executar testes unitários
-npm test
+#### 1️⃣ Cadastrar Cliente
+- Vá para: **Clientes → Novo Cliente**
+- Preencha: Nome, Telefone, Email, Endereço
+- Faça upload de uma foto (opcional)
+- Clique em **Salvar**
 
-# 📦 Build production otimizado
-npm run build -- --configuration production
-```
+#### 2️⃣ Cadastrar Funcionário
+- Vá para: **Funcionários → Novo Funcionário**
+- Preencha: Nome, Telefone, Email, Função
+- Clique em **Salvar**
+
+#### 3️⃣ Criar Serviço
+- Vá para: **Serviços → Novo Serviço**
+- Preencha: Nome, Descrição, Preço
+- Associe produtos necessários (drag & drop)
+- Clique em **Salvar**
+
+#### 4️⃣ Criar Agendamento
+- Vá para: **Agendamentos → Novo Agendamento**
+- Selecione: Cliente, Funcionário, Serviço, Data e Hora
+- Adicione observações (opcional)
+- Clique em **Salvar**
+
+#### 5️⃣ Gerenciar Agendamentos
+- Vá para: **Agendamentos → Listar**
+- Use **drag & drop** para reordenar agendamentos
+- Altere status (Pendente → Confirmado → Concluído)
+- Filtre por data ou cliente
 
 ---
 
@@ -115,42 +175,49 @@ npm run build -- --configuration production
 lavacar-project/
 ├── src/
 │   ├── app/
-│   │   ├── features/                    # ✨ Módulos principais
-│   │   │   ├── clientes/                # Gerenciamento de clientes
+│   │   ├── features/                    # 🎯 Módulos principais
+│   │   │   ├── clientes/
 │   │   │   │   ├── cadastro-cliente/
 │   │   │   │   ├── listar-clientes/
 │   │   │   │   └── services/
-│   │   │   ├── funcionarios/            # Gestão de funcionários
+│   │   │   │       └── cliente.service.ts
+│   │   │   │
+│   │   │   ├── funcionarios/
 │   │   │   │   ├── cadastro-funcionario/
 │   │   │   │   ├── listar-funcionarios/
 │   │   │   │   └── services/
-│   │   │   ├── agendamentos/            # Sistema de agendamentos
+│   │   │   │       └── funcionario.service.ts
+│   │   │   │
+│   │   │   ├── agendamentos/
 │   │   │   │   ├── cadastro-agendamento/
 │   │   │   │   ├── listar-agendamentos/
 │   │   │   │   └── services/
-│   │   │   └── servicos/                # Catálogo de serviços
+│   │   │   │       └── agendamento.service.ts
+│   │   │   │
+│   │   │   └── servicos/
 │   │   │       ├── listar-servicos/
-│   │   │       └── services/
+│   │   │       └── servicos.module.ts
+│   │   │
 │   │   ├── components/                  # 🎨 Componentes secundários
 │   │   │   ├── fornecedores/
 │   │   │   │   ├── cadastro-fornecedor/
 │   │   │   │   ├── listar-fornecedor/
 │   │   │   │   └── listar-produtos-fornecedor/
+│   │   │   │
 │   │   │   ├── produtos/
 │   │   │   │   ├── cadastro-produto/
 │   │   │   │   └── listar-produtos/
+│   │   │   │
 │   │   │   ├── services/
-│   │   │   ├── header/                  # Navegação principal
-│   │   │   ├── home/                    # Página inicial
-│   │   │   └── cadastrar-fornecedor/
-│   │   ├── shared/                      # 🔄 Recursos compartilhados
-│   │   │   ├── components/
-│   │   │   │   ├── layout/              # Layout principal
-│   │   │   │   └── list-header/
-│   │   │   └── services/
-│   │   │       ├── mensagens.service.ts # Alertas e diálogos
-│   │   │       └── theme.service.ts     # Tema claro/escuro
-│   │   ├── models/                      # 📊 Modelos de dados
+│   │   │   │   ├── cadastro-servico/
+│   │   │   │   └── listar-servico/
+│   │   │   │
+│   │   │   ├── header/
+│   │   │   ├── home/
+│   │   │   └── servicos/
+│   │   │       └── associacao-produtos-servico/
+│   │   │
+│   │   ├── models/                      # 📦 Modelos de dados
 │   │   │   ├── pessoa.model.ts
 │   │   │   ├── cliente.model.ts
 │   │   │   ├── funcionario.model.ts
@@ -159,324 +226,308 @@ lavacar-project/
 │   │   │   ├── servico.model.ts
 │   │   │   ├── agendamento.model.ts
 │   │   │   └── produto-servico.model.ts
-│   │   ├── core/                        # 🔧 Serviços centrais
+│   │   │
+│   │   ├── services/                    # 🔧 Serviços compartilhados
+│   │   │   ├── db.service.ts            # IndexedDB
+│   │   │   ├── produto.service.ts
+│   │   │   ├── fornecedor.service.ts
+│   │   │   ├── servico.service.ts
+│   │   │   └── produto-servico.service.ts
+│   │   │
+│   │   ├── shared/                      # 🌐 Recursos compartilhados
+│   │   │   ├── components/
+│   │   │   │   ├── layout/
+│   │   │   │   │   ├── header/
+│   │   │   │   │   └── footer/
+│   │   │   │   └── list-header/
+│   │   │   └── services/
+│   │   │       ├── mensagens.service.ts # Alertas SweetAlert2
+│   │   │       └── theme.service.ts     # Gerenciador de temas
+│   │   │
+│   │   ├── core/
 │   │   │   └── services/
 │   │   │       └── indexed-db.service.ts
+│   │   │
 │   │   ├── app.routes.ts                # Rotas da aplicação
 │   │   ├── app.component.ts
-│   │   └── app.config.ts
-│   ├── assets/                          # 📁 Recursos estáticos
-│   │   └── img/                         # Imagens e ícones
-│   ├── styles.css                       # 🎨 Estilos globais
-│   ├── index.html                       # HTML principal
-│   └── main.ts                          # Ponto de entrada
-├── package.json                         # Dependências do projeto
-├── tsconfig.json                        # Configuração TypeScript
+│   │   ├── app.component.html
+│   │   ├── app.config.ts
+│   │   └── app.component.css
+│   │
+│   ├── assets/                          # 📸 Imagens e recursos
+│   │   └── img/
+│   │       ├── demo-readme.gif
+│   │       ├── avatar-cliente.svg
+│   │       └── ...
+│   │
+│   ├── index.html
+│   ├── main.ts
+│   ├── styles.css                       # Estilos globais
+│   └── ...
+│
+├── public/
 ├── angular.json                         # Configuração Angular
-└── README.md                            # Este arquivo
+├── tsconfig.json                        # Configuração TypeScript
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## 🏗️ Arquitetura
 
-### � Diagrama de Casos de Uso
+### Padrão de Desenvolvimento
+
+O projeto segue a **arquitetura em camadas** com **componentes standalone**:
 
 ```
-                                    ┌─────────────────┐
-                                    │  Administrador  │
-                                    └────────┬────────┘
-                                             │
-                    ┌────────────────────────┼────────────────────────┐
-                    │                        │                        │
-                    ▼                        ▼                        ▼
-        ┌─────────────────────┐  ┌─────────────────────┐  ┌────────────────────┐
-        │ Gerenciar Clientes  │  │Gerenciar Funcionário│  │ Gerenciar Serviços │
-        │  ├─ Cadastrar       │  │  ├─ Cadastrar      │  │  ├─ Cadastrar      │
-        │  ├─ Listar          │  │  ├─ Listar         │  │  ├─ Listar         │
-        │  ├─ Editar          │  │  ├─ Editar         │  │  ├─ Editar         │
-        │  └─ Remover         │  │  └─ Remover        │  │  └─ Remover        │
-        └─────────────────────┘  └─────────────────────┘  └────────────────────┘
-                    │                        │                        │
-                    │                        │        ┌────────────────┤
-                    │                        │        │                │
-                    │                        └────────┼────────────────┼────────────┐
-                    │                                 │                │            │
-                    │                    ┌────────────▼──────────┐    │            │
-                    │                    │ Agendar Serviço       │    │            │
-                    │                    │  ├─ Criar Agendamento│    │            │
-                    │                    │  ├─ Visualizar       │    │            │
-                    │                    │  ├─ Editar           │    │            │
-                    │                    │  └─ Remover          │    │            │
-                    │                    └────────────┬──────────┘    │            │
-                    │                                 │                │            │
-                    ▼                                 ▼                ▼            ▼
-        ┌─────────────────────────────────────────────────────────────────────────────┐
-        │                          Sistema de Agendamento                             │
-        │  ├─ Validação de Cliente                                                   │
-        │  ├─ Validação de Funcionário Disponível                                    │
-        │  ├─ Confirmação de Serviço e Preço                                         │
-        │  ├─ Rastreamento de Status (Pendente → Confirmado → Concluído/Cancelado)  │
-        │  └─ Histórico de Agendamentos                                              │
-        └─────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────┐
+│     INTERFACE (Components)          │
+├─────────────────────────────────────┤
+│     LÓGICA (Services)               │
+├─────────────────────────────────────┤
+│     DADOS (Models + IndexedDB)      │
+└─────────────────────────────────────┘
+```
 
-        ┌─────────────────────────────────────────────────────────────────────────────┐
-        │                          Módulo Administrativo                              │
-        │  ├─ Gerenciar Fornecedores                                                  │
-        │  ├─ Gerenciar Produtos (com vínculo a Fornecedores)                         │
-        │  ├─ Associar Produtos a Serviços                                            │
-        │  └─ Relatórios de Inventário                                                │
-        └─────────────────────────────────────────────────────────────────────────────┘
+### Fluxo de Dados
+
+```
+Componente (Template)
+         ↓
+   Formulário Reativo
+         ↓
+   Service (Validação)
+         ↓
+   Model (Construção)
+         ↓
+   IndexedDB (Persistência)
+         ↓
+   ✅ Sucesso / ❌ Erro
+```
+
+### Tecnologias-Chave
+
+| Conceito | Implementação |
+|----------|---------------|
+| **Gerenciamento de Estado** | RxJS Subjects e Observables |
+| **Validação** | Reactive Forms com Validators |
+| **Armazenamento** | IndexedDB via Dexie |
+| **Alertas** | SweetAlert2 |
+| **UI Interactions** | Angular CDK Drag & Drop |
+
+---
+
+## 📦 Modelos de Dados
+
+### Pessoa (Base)
+```typescript
+class Pessoa {
+  id?: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  dataRegistro?: Date;
+}
+```
+
+### Cliente
+```typescript
+class Cliente extends Pessoa {
+  cpf: string;
+  endereco: string;
+  cidade: string;
+  foto?: string;
+}
+```
+
+### Funcionário
+```typescript
+class Funcionario extends Pessoa {
+  matricula: string;
+  funcao: string;
+  dataAdmissao: Date;
+}
+```
+
+### Fornecedor
+```typescript
+class Fornecedor {
+  id?: number;
+  cnpj: string;
+  nomeEmpresa: string;
+  contato: string;
+}
+```
+
+### Produto
+```typescript
+class Produto {
+  id?: number;
+  nome: string;
+  descricao: string;
+  preco: number;
+  estoque: number;
+  fornecedorId: number;
+}
+```
+
+### Serviço
+```typescript
+class Servico {
+  id?: number;
+  nome: string;
+  descricao: string;
+  preco: number;
+  duracao: number;
+}
+```
+
+### Agendamento
+```typescript
+class Agendamento {
+  id?: number;
+  clienteId: number;
+  funcionarioId: number;
+  servicoId: number;
+  data: string;           // YYYY-MM-DD
+  hora: string;          // HH:mm
+  status: StatusAgendamento;
+  observacoes: string;
+}
+
+type StatusAgendamento = 'Pendente' | 'Confirmado' | 'Concluído' | 'Cancelado';
+```
+
+### ProdutoServico
+```typescript
+class ProdutoServico {
+  id?: number;
+  servicoId: number;
+  produtoId: number;
+  quantidade: number;
+}
 ```
 
 ---
 
-## �️ Diagrama de Classes
+## 🔧 Serviços
 
+### DbService (IndexedDB)
+Gerencia todas as operações do banco de dados.
+
+```typescript
+@Injectable({ providedIn: 'root' })
+export class DbService extends Dexie {
+  fornecedores: Table<Fornecedor, number>;
+  produtos: Table<Produto, number>;
+  servicos: Table<Servico, number>;
+  produtosServico: Table<ProdutoServico>;
+  clientes: Table<Cliente, number>;
+  funcionarios: Table<Funcionario, number>;
+  agendamentos: Table<Agendamento, number>;
+}
 ```
-                              ┌─────────────────────┐
-                              │      Pessoa         │
-                              ├─────────────────────┤
-                              │ - id?: number       │
-                              │ - nome: string      │
-                              │ - telefone: string  │
-                              │ - email: string     │
-                              │ - foto: string      │
-                              └──────────┬──────────┘
-                                         │
-                 ┌───────────────────────┴───────────────────────┐
-                 │                                               │
-                 ▼                                               ▼
-        ┌──────────────────────┐                      ┌──────────────────────┐
-        │     Cliente          │                      │    Funcionario       │
-        ├──────────────────────┤                      ├──────────────────────┤
-        │ - endereco: string   │                      │ - funcao: string     │
-        │ - id?: number        │                      │ - dataAdmissao: Date │
-        │                      │                      │ - id?: number        │
-        │ + adicionar()        │                      │                      │
-        │ + obterTodos()       │                      │ + adicionar()        │
-        │ + obterPorId(id)     │                      │ + obterTodos()       │
-        │ + atualizar()        │                      │ + obterPorId(id)     │
-        │ + remover(id)        │                      │ + atualizar()        │
-        └──────────────────────┘                      │ + remover(id)        │
-                                                     └──────────────────────┘
 
-        ┌──────────────────────┐                      ┌──────────────────────┐
-        │    Fornecedor        │                      │      Produto         │
-        ├──────────────────────┤                      ├──────────────────────┤
-        │ - id?: number        │◄─────────────────────│ - id?: number        │
-        │ - nome: string       │   fornecedorId       │ - nome: string       │
-        │ - cnpj: string       │                      │ - preco: number      │
-        │ - fone: string       │                      │ - quantidade: number │
-        │ - ordem?: number     │                      │ - ordem?: number     │
-        │                      │                      │                      │
-        │ + adicionar()        │                      │ + adicionar()        │
-        │ + obterTodos()       │                      │ + obterTodos()       │
-        │ + obterPorId(id)     │                      │ + obterPorId(id)     │
-        │ + atualizar()        │                      │ + atualizar()        │
-        │ + remover(id)        │                      │ + remover(id)        │
-        └──────────────────────┘                      └──────────────────────┘
+### ClienteService
+```typescript
+async add(cliente: Cliente): Promise<number>;
+async getAll(): Promise<Cliente[]>;
+async getById(id: number): Promise<Cliente | undefined>;
+async update(cliente: Cliente): Promise<void>;
+async delete(id: number): Promise<void>;
+```
 
-        ┌──────────────────────────┐                  ┌──────────────────────────┐
-        │      Servico             │                  │   ProdutoServico         │
-        ├──────────────────────────┤                  ├──────────────────────────┤
-        │ - id?: number            │◄─────┐          │ - id?: number            │
-        │ - nome: string           │      │servico   │ - servicoId: number      │
-        │ - descricao: string      │      │    ├────►│ - produtoId: number      │
-        │ - preco: number          │      │          │ - quantidade: number     │
-        │ - ordem: number          │      │          │ - ordem?: number         │
-        │                          │      │          │                          │
-        │ + adicionar()            │      │          │ + adicionar()            │
-        │ + obterTodos()           │      │          │ + obterTodos()           │
-        │ + obterPorId(id)         │      │          │ + obterPorId(id)         │
-        │ + atualizar()            │      │          │ + atualizar()            │
-        │ + remover(id)            │      │          │ + remover(id)            │
-        └──────────────────────────┘      │          └──────────────────────────┘
-                      ▲                   │                      ▲
-                      │                   │                      │
-                      └───────────────────┼──────────────────────┘
-                                          └─────► Produto
+### AgendamentoService
+```typescript
+async adicionar(agendamento: Agendamento): Promise<number>;
+async obterTodos(): Promise<Agendamento[]>;
+async obterPorId(id: number): Promise<Agendamento | undefined>;
+async atualizar(agendamento: Agendamento): Promise<void>;
+async deletar(id: number): Promise<void>;
+async verificarConflito(data: string, hora: string): Promise<boolean>;
+```
 
-        ┌──────────────────────────────────┐
-        │      Agendamento                 │
-        ├──────────────────────────────────┤
-        │ - id?: number                    │
-        │ - clienteId: number              │◄────── Cliente
-        │ - funcionarioId: number          │◄────── Funcionario
-        │ - servicoId: number              │◄────── Servico
-        │ - data: string                   │
-        │ - hora: string                   │
-        │ - status: StatusAgendamento      │
-        │ - observacoes: string            │
-        │ - ordem: number                  │
-        │                                  │
-        │ + adicionar()                    │
-        │ + obterTodos()                   │
-        │ + obterPorId(id)                 │
-        │ + atualizar()                    │
-        │ + remover(id)                    │
-        │ + filtrarPorStatus()             │
-        │ + gerarRelatorio()               │
-        └──────────────────────────────────┘
+### MensagensService
+Gerencia alertas e notificações via SweetAlert2.
 
-        ┌──────────────────────────────────────────────────────┐
-        │           Serviço Central de Dados                   │
-        │         IndexedDbService                            │
-        ├──────────────────────────────────────────────────────┤
-        │ - stores: Map<string, ObjectStore>                   │
-        │                                                      │
-        │ + adicionar(store, objeto)                           │
-        │ + obterTodos(store)                                  │
-        │ + obterPorId(store, id)                              │
-        │ + atualizar(store, objeto)                           │
-        │ + remover(store, id)                                 │
-        │ + limpar(store)                                      │
-        │ + exportarDados()                                    │
-        │ + importarDados(dados)                               │
-        └──────────────────────────────────────────────────────┘
+```typescript
+async exibirSucesso(titulo: string, mensagem: string): Promise<void>;
+async exibirErro(titulo: string, mensagem: string): Promise<void>;
+async confirmarExclusao(mensagem: string): Promise<boolean>;
 ```
 
 ---
 
-## 🎨 Interface e UX
+## 📝 Scripts NPM
 
-### Tema Claro
-- Cores claras e naturais
-- Fácil leitura em ambientes bem iluminados
-- Padrão de design moderno e limpo
-
-### Tema Escuro
-- Reduz fadiga visual em ambientes com pouca luz
-- Cores mais suaves e agradáveis
-- Transição suave entre temas
-
-### Responsividade
-- ✅ Desktop (1920px+)
-- ✅ Tablet (768px - 1024px)
-- ✅ Mobile (até 768px)
-
----
-
-## 🔄 Fluxo de Agendamento
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Novo Agendamento                              │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         ▼
-        ┌─────────────────────────────────┐
-        │  1. Selecionar Cliente          │
-        │     └─ Buscar ou criar novo     │
-        └────────────┬────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────────┐
-        │  2. Escolher Funcionário        │
-        │     └─ Verificar disponibilidade│
-        └────────────┬────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────────┐
-        │  3. Selecionar Serviço          │
-        │     └─ Visualizar preço         │
-        └────────────┬────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────────┐
-        │  4. Agendar Data e Hora         │
-        │     └─ Validar conflitos        │
-        └────────────┬────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────────┐
-        │  5. Adicionar Observações       │
-        │     (opcional)                  │
-        └────────────┬────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────────┐
-        │  6. Revisar Informações         │
-        └────────────┬────────────────────┘
-                     │
-         ┌───────────┴────────────┐
-         │                        │
-         ▼                        ▼
-    ┌─────────┐            ┌──────────┐
-    │ Confirmar│            │  Cancelar │
-    └────┬────┘            └──────────┘
-         │
-         ▼
-┌──────────────────────────────────────┐
-│ Agendamento Criado com Sucesso! ✅   │
-│ Status: Pendente                     │
-│ (Aguardando confirmação)             │
-└──────────────────────────────────────┘
-         │
-         ├────────────────┬────────────────┐
-         ▼                ▼                ▼
-    ┌────────┐       ┌──────────┐    ┌──────────┐
-    │Confirmar│       │  Alterar  │    │ Cancelar │
-    │         │       │           │    │          │
-    │Status:  │       │Status:    │    │Status:   │
-    │Confirmad│       │Pendente→  │    │Cancelado │
-    │         │       │Confirmado │    │          │
-    └────────┘       └──────────┘    └──────────┘
-         │                 │               │
-         ▼                 ▼               ▼
-    ┌──────────────────────────────────────────┐
-    │      Agendamento em Processamento        │
-    │   Aguardando data/hora do serviço        │
-    └──────────────────────────────────────────┘
-         │
-         └─► Status: Concluído (após data/hora)
-         └─► Status: Cancelado (se cancelar)
+```bash
+npm start              # Inicia servidor de desenvolvimento (http://localhost:4200)
+npm run build          # Build para produção
+npm run watch          # Build em modo watch
+npm test               # Executa testes unitários
+npm run lint           # Verifica código (se ESLint configurado)
 ```
 
 ---
 
-## � Armazenamento de Dados
+## 🌍 Banco de Dados (IndexedDB)
 
-O projeto utiliza **IndexedDB** para armazenamento local de dados, o que significa:
+### Estrutura
 
-✅ **Vantagens:**
-- Dados persistem no navegador
-- Sem necessidade de servidor
-- Rápido acesso aos dados
-- Suporta grandes volumes de dados
+O banco de dados "LavaCarDb" contém as seguintes lojas:
 
-⚠️ **Limitações:**
-- Dados específicos de cada navegador
-- Não sincroniza entre dispositivos
-- Limpeza do cache/histórico pode remover dados
+| Loja | Chave Primária | Índices |
+|------|---|---|
+| **fornecedores** | ++id | nome, cnpj, ordem |
+| **produtos** | ++id | nome, fornecedorId, ordem |
+| **servicos** | ++id | nome, ordem |
+| **produtosServico** | [servicoId+produtoId] | servicoId, produtoId |
+| **clientes** | ++id | nome, cpf |
+| **funcionarios** | ++id | nome, email |
+| **agendamentos** | ++id | data, clienteId, ordem |
 
-### Estrutura do IndexedDB
+### Inicialização
 
+O banco é criado automaticamente na primeira execução. Os dados são persistidos no navegador do usuário.
+
+---
+
+## 🎨 Estilos e Tema
+
+### CSS Global (`styles.css`)
+Define as variáveis CSS principais:
+
+```css
+:root {
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --interactive-hover: #0d6efd;
+}
 ```
-Database: LavaCarDB
-├── Store: clientes
-│   └── Index: id (primary), nome, email
-├── Store: funcionarios
-│   └── Index: id (primary), nome, funcao
-├── Store: fornecedores
-│   └── Index: id (primary), nome, cnpj
-├── Store: produtos
-│   └── Index: id (primary), nome, fornecedorId
-├── Store: servicos
-│   └── Index: id (primary), nome
-├── Store: agendamentos
-│   └── Index: id (primary), clienteId, funcionarioId, data
-└── Store: produtoServicos
-    └── Index: id (primary), servicoId, produtoId
+
+### Temas Dinâmicos
+O `ThemeService` permite alternar entre temas claro e escuro:
+
+```typescript
+toggleTheme(): void {
+  this.tema = this.tema === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', this.tema);
+}
 ```
 
 ---
 
 ## 🧪 Testes
 
-O projeto inclui testes unitários para componentes e serviços.
-
-### Executar Testes
+### Executar Testes Unitários
 
 ```bash
 npm test
@@ -484,383 +535,131 @@ npm test
 
 ### Estrutura de Testes
 
-```
-src/
-├── app/
-│   ├── models/
-│   │   ├── *.model.spec.ts
-│   ├── services/
-│   │   ├── *.service.spec.ts
-│   └── features/
-│       └── **/
-│           └── *.component.spec.ts
+```typescript
+describe('ClienteService', () => {
+  let service: ClienteService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ClienteService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
 ```
 
 ---
 
-## � Documentação de Componentes
+## 📦 Build e Deploy
 
-### ClienteService
+### Build para Produção
 
-Gerencia operações CRUD para clientes.
-
-```typescript
-// Adicionar cliente
-const cliente = new Cliente('Rua X', 'João', '11999999999', 'joao@email.com');
-const id = await clienteService.adicionar(cliente);
-
-// Obter todos
-const clientes = await clienteService.obterTodos();
-
-// Obter por ID
-const cliente = await clienteService.obterPorId(1);
-
-// Atualizar
-cliente.nome = 'João Silva';
-await clienteService.atualizar(cliente);
-
-// Remover
-await clienteService.remover(1);
+```bash
+npm run build
 ```
 
-### AgendamentoService
+### Estrutura de Saída
 
-Gerencia agendamentos com validações de conflito.
-
-```typescript
-// Criar agendamento
-const agendamento = new Agendamento(
-  clienteId,
-  funcionarioId,
-  servicoId,
-  '2025-10-20',
-  '10:30'
-);
-const id = await agendamentoService.adicionar(agendamento);
-
-// Listar agendamentos de um cliente
-const agendamentos = await agendamentoService.obterTodos();
 ```
+dist/lavacar-project/
+├── index.html
+├── main.js
+├── styles.css
+└── assets/
+```
+
+### Deploy no GitHub Pages
+
+1. Faça build: `npm run build`
+2. Renomeie `dist` para `docs`
+3. Commit e push
+4. Em Settings → Pages → Source: `/docs`
 
 ---
 
-## 🎯 Funcionalidades por Versão
+## 🔒 Segurança
 
-### v1.0.0 (Atual)
-- ✅ Gerenciamento de Clientes
-- ✅ Gestão de Funcionários
-- ✅ Cadastro de Fornecedores
-- ✅ Controle de Produtos
-- ✅ Catálogo de Serviços
-- ✅ Sistema de Agendamentos
-- ✅ Tema Claro/Escuro
-- ✅ Validação em Tempo Real
-- ✅ Interface Responsiva
+### Dados Sensíveis
+- ✅ Senhas não são armazenadas
+- ✅ Dados ficam locais no navegador (IndexedDB)
+- ✅ Nenhum dado é enviado para servidor
+- ✅ Validação em tempo real
 
-### Roadmap (Futuras Versões)
-- 🔄 Sincronização com Backend
-- 📊 Relatórios e Análises
-- 📧 Notificações por Email
-- 📱 App Mobile (React Native)
-- 💳 Integração com Pagamentos
-- 📍 Mapa de Localização
-- 🔐 Autenticação de Usuários
+### Boas Práticas
+- Use HTTPS em produção
+- Configure CSP (Content Security Policy)
+- Implemente autenticação se necessário
+- Valide entrada de usuário
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Problema: Aplicação não inicia
-
+### A aplicação não carrega
 ```bash
-# Limpe cache e reinstale dependências
-rm -rf node_modules package-lock.json
+# Limpe o cache
+npm cache clean --force
+
+# Reinstale dependências
+rm -rf node_modules
 npm install
+
+# Restart o servidor
 npm start
 ```
 
-### Problema: Dados não aparecem
+### IndexedDB não está funcionando
+- Certifique-se que o navegador suporta IndexedDB
+- Limpe dados do site (DevTools → Application → Clear storage)
+- Verifique console para erros
 
-- Verifique o console do navegador (F12)
-- Abra DevTools → Application → IndexedDB
-- Verifique se o store existe
-- Tente limpar o cache: Ctrl+Shift+Delete
-
-### Problema: Tema não funciona
-
-```bash
-# Recompile o projeto
-npm run build
-npm start
-```
+### Agendamentos não aparecem
+- Verifique se cliente, funcionário e serviço foram criados primeiro
+- Confirme datas válidas
+- Limpe cache do navegador
 
 ---
 
-## 🤝 Como Contribuir
+## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Siga estes passos:
+Contribuições são bem-vindas! Por favor:
 
-1. **Fork** o projeto
-2. **Crie uma branch** para sua feature (`git checkout -b feature/MinhaFeature`)
-3. **Commit** suas mudanças (`git commit -m 'feat: adiciona MinhaFeature'`)
-4. **Push** para a branch (`git push origin feature/MinhaFeature`)
-5. **Abra um Pull Request**
-
-### Padrões de Commit
-
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Mudanças na documentação
-- `style:` Formatação de código
-- `refactor:` Refatoração de código
-- `perf:` Melhorias de performance
-- `test:` Testes
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ---
 
-## � Licença
+## 📄 Licença
 
-Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 📞 Contato
+## 📧 Contato
 
-- **Email:** ericdasilvadalaporta@gmail.com
-- **GitHub:** [@ericdalaporta](https://github.com/ericdalaporta)
-
-Para dúvidas, sugestões ou reportar bugs, entre em contato através do email acima.
+**Desenvolvedor:** Eric Dala Porta  
+**Email:** ericdasilvadalaporta@gmail.com  
+**GitHub:** [@ericdalaporta](https://github.com/ericdalaporta)
 
 ---
 
 ## 🙏 Agradecimentos
 
-- [Angular Community](https://angular.io/)
-- [Bootstrap](https://getbootstrap.com/)
-- [Dexie.js](https://dexie.org/)
-- Todos os contribuidores
+- [Angular](https://angular.io/) - Framework web
+- [Bootstrap](https://getbootstrap.com/) - Styling
+- [Dexie](https://dexie.org/) - IndexedDB wrapper
+- [SweetAlert2](https://sweetalert2.github.io/) - Alertas bonitos
 
 ---
 
-## 📊 Estatísticas do Projeto
+**Desenvolvido com ❤️ por Eric Dala Porta**
 
-- **Componentes:** 15+
-- **Serviços:** 10+
-- **Modelos de Dados:** 8
-- **Rotas:** 20+
-- **Linhas de Código:** 5000+
+> "Um bom gerenciamento começa com as ferramentas certas."
 
----
-
-<div align="center">
-
-### ⭐ Se este projeto foi útil, considere dar uma estrela!
-
-**Desenvolvido com ❤️ por [Eric da Silva da Porta](https://github.com/ericdalaporta)**
-
-**Última Atualização:** Outubro 2025
-
-</div>
-
----
-
-## 📖 Recursos Adicionais
-
-- [Documentação do Angular 19](https://angular.io/docs)
-- [Guia do Bootstrap 5](https://getbootstrap.com/docs/5.3)
-- [Documentação Dexie](https://dexie.org/docs)
-- [MDN Web Docs - IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
-
-✅ **Em produção e totalmente padronizado!**
-
-O projeto foi recentemente padronizado seguindo as melhores práticas do Angular 19.
-Consulte [RELATORIO_PADRONIZACAO.md](./RELATORIO_PADRONIZACAO.md) para mais detalhes.
-
-## 🛠️ Tecnologias
-
-- **Angular 19.1.0** - Framework principal
-- **TypeScript 5.7.2** - Linguagem de programação
-- **Bootstrap 5.3.8** - Framework CSS
-- **Dexie 4.2.0** - Banco de dados IndexedDB
-- **SweetAlert2** - Alertas e modais
-- **Bootstrap Icons** - Ícones
-
-## 📦 Pré-requisitos
-
-- Node.js (versão 18 ou superior)
-- npm ou yarn
-- Angular CLI
-
-## 🔧 Instalação
-
-```bash
-# Clone o repositório
-git clone <url-do-repositorio>
-
-# Entre na pasta do projeto
-cd lavacar-project-main
-
-# Instale as dependências
-npm install
-
-# Execute o projeto
-npm start
-```
-
-O projeto estará disponível em `http://localhost:4200/`
-
-## 📝 Scripts Disponíveis
-
-```bash
-# Iniciar servidor de desenvolvimento
-npm start
-
-# Build de produção
-npm run build
-
-# Build com watch (desenvolvimento)
-npm run watch
-
-# Executar testes
-npm test
-```
-
-## 📁 Estrutura do Projeto
-
-```
-src/
-├── app/
-│   ├── components/          # Componentes da aplicação
-│   │   ├── fornecedores/    # Módulo de fornecedores
-│   │   ├── produtos/        # Módulo de produtos
-│   │   ├── services/        # Módulo de serviços
-│   │   └── home/            # Página inicial
-│   ├── models/              # Interfaces de dados
-│   ├── services/            # Serviços (lógica de negócio)
-│   └── shared/              # Componentes compartilhados
-│       └── components/
-│           └── layout/      # Header, Footer, etc.
-├── styles.css               # Estilos globais
-└── index.html               # HTML principal
-```
-
-## 📚 Documentação
-
-O projeto possui documentação completa:
-
-- **[PADRONIZACAO.md](./PADRONIZACAO.md)** - Histórico de padronizações aplicadas
-- **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** - Guia de estilo e convenções de código
-- **[CHECKLIST.md](./CHECKLIST.md)** - Checklist para desenvolvimento
-- **[RELATORIO_PADRONIZACAO.md](./RELATORIO_PADRONIZACAO.md)** - Relatório completo das mudanças
-
-## 🎯 Funcionalidades
-
-### Fornecedores
-- ✅ Cadastro de fornecedores
-- ✅ Listagem com paginação e filtro
-- ✅ Edição e exclusão
-- ✅ Visualização de produtos por fornecedor
-
-### Produtos
-- ✅ Cadastro de produtos
-- ✅ Listagem de produtos
-- ✅ Edição e exclusão
-- ✅ Vínculo com fornecedores
-
-### Serviços
-- ✅ Cadastro de serviços
-- ✅ Listagem de serviços
-- ✅ Edição e exclusão
-- ✅ Associação de produtos
-
-## 🎨 Padrões de Código
-
-O projeto segue padrões rigorosos de código:
-
-### Componentes
-```typescript
-@Component({
-  selector: 'app-nome',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './nome.component.html',
-  styleUrl: './nome.component.css'  // singular!
-})
-```
-
-### Serviços (Métodos CRUD)
-- `add()` - Criar registro
-- `getAll()` - Listar todos
-- `getById(id)` - Buscar por ID
-- `update()` - Atualizar registro
-- `delete(id)` - Excluir registro
-
-### Modelos
-```typescript
-export interface NomeModel {
-  id?: number;
-  campo: string;
-}
-```
-
-Para mais detalhes, consulte [STYLE_GUIDE.md](./STYLE_GUIDE.md)
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Siga o [STYLE_GUIDE.md](./STYLE_GUIDE.md)
-4. Use o [CHECKLIST.md](./CHECKLIST.md) antes de commitar
-5. Commit suas mudanças (`git commit -m 'feat: adiciona MinhaFeature'`)
-6. Push para a branch (`git push origin feature/MinhaFeature`)
-7. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👨‍💻 Desenvolvimento
-
-### Comandos Úteis
-
-```bash
-# Gerar novo componente
-ng generate component nome-componente
-
-# Gerar novo serviço
-ng generate service nome-servico
-
-# Verificar versão do Angular
-ng version
-```
-
-### Build
-
-```bash
-# Build de desenvolvimento
-npm run build
-
-# Build de produção
-npm run build -- --configuration production
-```
-
-## 🐛 Reportar Bugs
-
-Encontrou um bug? Por favor, abra uma issue descrevendo:
-1. Passos para reproduzir
-2. Comportamento esperado
-3. Comportamento atual
-4. Screenshots (se aplicável)
-
-## 📞 Suporte
-
-Para dúvidas sobre padrões de código, consulte:
-1. [STYLE_GUIDE.md](./STYLE_GUIDE.md) - Guia completo de estilo
-2. [CHECKLIST.md](./CHECKLIST.md) - Checklist de desenvolvimento
-3. Exemplos nos componentes existentes
-
----
-
-**Gerado com** [Angular CLI](https://github.com/angular/angular-cli) **versão 19.1.7**
-
-**Última atualização**: Outubro 2025
+**Última atualização:** Outubro 16, 2025  
+**Versão:** 1.0.0
