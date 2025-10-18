@@ -48,6 +48,13 @@ Aplicação desenvolvida em **Angular 19**, com **IndexedDB**, suporte **PWA** e
 3️⃣ **Agende atendimentos** com data, hora e responsável  
 4️⃣ **Gerencie tudo em um só painel**, mesmo sem internet  
 
+## 📊 Diagrama de Classes
+
+ 
+
+<img src="./docs/assets/img/diagrama-classess.png" width="770" alt="Demonstração do sistema">
+
+ 
  
 ## 📋 Pré-requisitos
 
