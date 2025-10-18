@@ -37,7 +37,7 @@
 
       <div>
         <label class="form-label" for="dataAdmissao">Data de admissão</label>
-        <input id="dataAdmissao" type="date" class="form-control" formControlName="dataAdmissao" />
+        <input id="dataAdmissao" type="date" class="form-control input-dark-icon" formControlName="dataAdmissao" />
         <div class="text-danger pequeno" *ngIf="obterControle('dataAdmissao')?.invalid && (obterControle('dataAdmissao')?.dirty || obterControle('dataAdmissao')?.touched)">
           Informe a data de admissão.
         </div>
@@ -55,7 +55,7 @@
       </div>
 
       <div class="cadastro-actions">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="formFuncionario.invalid">Salvar</button>
         <button type="button" class="btn btn-outline-danger" (click)="limparFormulario()">Limpar</button>
       </div>
     </form>

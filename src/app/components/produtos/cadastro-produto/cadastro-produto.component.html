@@ -84,7 +84,7 @@
             </div>
 
             <div class="cadastro-actions">
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="formProduto.invalid">Salvar</button>
                 <button type="reset" class="btn btn-outline-danger">Limpar</button>
             </div>
         </form>

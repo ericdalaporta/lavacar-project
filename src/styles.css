@@ -152,8 +152,8 @@ main {
 	width: 100%;
 }
 
-.cadastro-form > div:has(textarea),
-.cadastro-form > .cadastro-actions {
+.cadastro-form>div:has(textarea),
+.cadastro-form>.cadastro-actions {
 	grid-column: 1 / -1;
 }
 
@@ -163,32 +163,32 @@ main {
 	gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
-.cadastro-form--compact-grid > div:has(textarea) {
+.cadastro-form--compact-grid>div:has(textarea) {
 	grid-column: 1 / -1;
 	max-width: 360px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.cadastro-form--compact-grid > div:has(input[type="file"]) {
+.cadastro-form--compact-grid>div:has(input[type="file"]) {
 	grid-column: 1 / -1;
 	width: 100%;
 }
 
-.cadastro-form--compact-grid > .cadastro-actions,
-.cadastro-form--compact-grid > .upload-status,
-.cadastro-form--compact-grid > section {
+.cadastro-form--compact-grid>.cadastro-actions,
+.cadastro-form--compact-grid>.upload-status,
+.cadastro-form--compact-grid>section {
 	grid-column: 1 / -1;
 }
 
-.cadastro-form > div {
+.cadastro-form>div {
 	width: 100%;
 	max-width: 360px;
 	margin-inline: auto;
 }
 
-.cadastro-form > div:has(textarea),
-.cadastro-form > .cadastro-actions {
+.cadastro-form>div:has(textarea),
+.cadastro-form>.cadastro-actions {
 	max-width: none;
 }
 
@@ -516,11 +516,11 @@ tbody tr:hover {
 	color: var(--text-base) !important;
 }
 
-.table-striped tbody tr:nth-of-type(odd) > * {
+.table-striped tbody tr:nth-of-type(odd)>* {
 	background-color: var(--surface-strong);
 }
 
-.table-hover tbody tr:hover > * {
+.table-hover tbody tr:hover>* {
 	background-color: rgba(59, 130, 246, 0.12);
 }
 
@@ -550,4 +550,19 @@ tbody tr:hover {
 		height: 108px;
 	}
 }
-/* You can add global styles to this file, and also import other style files */
+
+:root.theme-dark .input-dark-icon {
+	color-scheme: dark;
+	color: #ffffff;
+}
+
+:root.theme-dark .input-dark-icon[type="date"]::-webkit-calendar-picker-indicator,
+:root.theme-dark .input-dark-icon[type="time"]::-webkit-calendar-picker-indicator {
+	filter: invert(1) brightness(3) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+	cursor: pointer;
+}
+
+:root.theme-dark .input-dark-icon::-webkit-clear-button {
+	filter: invert(1) brightness(3);
+	cursor: pointer;
+}
