@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <title>Projeto LavaCar</title>
     <script>
-      sessionStorage.redirect = location.href;
+      // Store the original URL for SPA routing
+      if (location.pathname !== '/lavacar-project/index.html') {
+        sessionStorage.redirect = location.pathname + location.search;
+      }
     </script>
-    <meta http-equiv="refresh" content="0;URL='/lavacar-project/index.html'"></meta>
+    <meta http-equiv="refresh" content="0;URL='/lavacar-project/'"></meta>
   </head>
   <body>
   </body>
