@@ -5,7 +5,7 @@
 <br>
 
 
-Aplicação desenvolvida em **Angular 19**, com **IndexedDB**, suporte **PWA** e **completamente offline**.
+Aplicação desenvolvida em **Angular 19**, com **IndexedDB**, suporte **PWA** e **completamente offline**
 <br><br>
 
 <img src="./docs/assets/img/demo-readme.gif" width="770" alt="Demonstração do sistema">
