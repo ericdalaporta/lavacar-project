@@ -1,0 +1,59 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Funcionários cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroFuncionarios" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroFuncionarios"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite nome, função, e-mail ou telefone"
+        />
+      </div>
+
+      <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando funcionários...</div>
+
+      <div *ngIf="!carregando && funcionarios.length === 0" class="lista-feedback">
+        Nenhum funcionário cadastrado até o momento.
+      </div>
+
+      <div
+        *ngIf="!carregando && funcionarios.length > 0 && funcionariosFiltrados.length === 0"
+        class="lista-feedback"
+      >
+        Nenhum funcionário encontrado para a pesquisa.
+      </div>
+
+      <div class="row g-4 justify-content-center" *ngIf="!carregando && funcionariosFiltrados.length > 0">
+        <div class="col-12 col-lg-6" *ngFor="let funcionario of funcionariosFiltrados; trackBy: trackById">
+          <article class="user-card">
+            <div class="user-card-img">
+              <img [src]="funcionario.foto || fotoPadrao" alt="Foto de {{ funcionario.nome }}" />
+            </div>
+            <div class="user-card-info">
+              <h2>{{ funcionario.nome }}</h2>
+              <p><span>Função:</span> {{ funcionario.funcao }}</p>
+              <p><span>Email:</span> {{ funcionario.email }}</p>
+              <p><span>Telefone:</span> {{ funcionario.telefone }}</p>
+              <p>
+                <span>Admissão:</span>
+                {{ funcionario.dataAdmissao ? (funcionario.dataAdmissao | date: 'dd/MM/yyyy') : 'Não informado' }}
+              </p>
+              <div class="user-card-actions">
+                <button type="button" (click)="editarFuncionario(funcionario.id)" title="Editar funcionário">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button type="button" (click)="removerFuncionario(funcionario.id)" title="Remover funcionário">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

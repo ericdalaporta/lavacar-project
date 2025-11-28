@@ -1,0 +1,14 @@
+.layout-shell {
+	flex: 1;
+}
+
+.layout-main {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.layout-main:has(.cadastro-page) {
+	justify-content: center;
+}

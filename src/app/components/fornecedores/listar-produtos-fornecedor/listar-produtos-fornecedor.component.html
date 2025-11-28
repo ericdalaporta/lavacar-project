@@ -1,0 +1,62 @@
+<div class="container py-4">
+    <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xxl-8 list-page">
+            <h1 class="titulo-lista text-center">Produtos de {{ nomeFornecedor }}</h1>
+
+            <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando produtos...</div>
+
+            <ng-container *ngIf="!carregando">
+                <!-- Tabela Desktop -->
+                <table
+                    class="table text-center align-middle tabela-ordenavel"
+                    *ngIf="produtos.length > 0"
+                >
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-1"></th>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody cdkDropList [cdkDropListData]="produtos" (cdkDropListDropped)="aoReordenar($event)">
+                        <tr *ngFor="let produto of produtos; let i = index; trackBy: trackById" cdkDrag>
+                            <td cdkDragHandle title="Arraste para reordenar">
+                                <i class="bi bi-list icone-arrastar"></i>
+                            </td>
+                            <th scope="row">{{ produto.ordem || i + 1 }}</th>
+                            <td class="fw-semibold">{{ produto.nome }}</td>
+                            <td>{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+                            <td>{{ produto.quantidade }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Cards Mobile -->
+                <div class="mobile-cards" *ngIf="produtos.length > 0">
+                    <div class="mobile-card" *ngFor="let produto of produtos; let i = index">
+                        <div class="mobile-card-header">
+                            <h3 class="mobile-card-title">{{ produto.nome }}</h3>
+                            <span class="mobile-card-price">{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+                        </div>
+                        <div class="mobile-card-body">
+                            <div class="mobile-card-row">
+                                <span class="mobile-card-label">#</span>
+                                <span class="mobile-card-value">{{ produto.ordem || i + 1 }}</span>
+                            </div>
+                            <div class="mobile-card-row">
+                                <span class="mobile-card-label">Quantidade</span>
+                                <span class="mobile-card-value">{{ produto.quantidade }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lista-feedback" *ngIf="produtos.length === 0">
+                    O fornecedor não possui produtos cadastrados.
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,248 @@
+.pequeno {
+	font-size: 0.85rem;
+	color: var(--text-muted);
+}
+
+.textarea-fixed {
+	resize: none;
+}
+
+/* Botão Anexar Produtos */
+.btn-anexar-produtos {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	background-color: var(--surface-field, #f8fafc);
+	border: 1px solid var(--border-soft, #d1d5db);
+	border-radius: 10px;
+	color: var(--text-base, #1f2937);
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.btn-anexar-produtos:hover {
+	background-color: var(--surface-strong, #f1f3f7);
+	border-color: var(--text-muted, #4b5563);
+}
+
+.btn-anexar-produtos i {
+	font-size: 1.1rem;
+}
+
+.badge-produtos {
+	background-color: #3b82f6;
+	color: #ffffff;
+	font-size: 0.75rem;
+	font-weight: 600;
+	padding: 0.15rem 0.5rem;
+	border-radius: 10px;
+	margin-left: 0.25rem;
+}
+
+.produtos-selecionados-resumo {
+	margin-top: 0.5rem;
+	text-align: center;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1050;
+	padding: 1rem;
+}
+
+.modal-produtos {
+	background-color: var(--surface-card, #ffffff);
+	border-radius: 18px;
+	box-shadow: var(--shadow-elevated, 0 24px 60px rgba(34, 35, 58, 0.18));
+	max-width: 900px;
+	width: 100%;
+	max-height: 90vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--border-soft, #e5e7eb);
+}
+
+.modal-titulo {
+	font-weight: 700;
+	font-size: 1.25rem;
+	color: var(--text-base, #1f2937);
+	margin: 0;
+}
+
+.btn-fechar {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+	color: var(--text-muted, #6b7280);
+	font-size: 1.25rem;
+	transition: color 0.2s ease;
+}
+
+.btn-fechar:hover {
+	color: var(--text-base, #1f2937);
+}
+
+.modal-body {
+	padding: 1.5rem;
+	overflow-y: auto;
+	flex: 1;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	padding: 1rem 1.5rem;
+	border-top: 1px solid var(--border-soft, #e5e7eb);
+}
+
+/* Listas de Produtos */
+.listas-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+	width: 100%;
+}
+
+.lista-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.titulo-lista {
+	text-align: center;
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--text-base, #374151);
+}
+
+.lista-produtos {
+	min-height: 280px;
+	border: 2px dashed var(--border-soft, #d1d5db);
+	border-radius: 12px;
+	padding: 1.25rem;
+	background-color: var(--surface-base, #ffffff);
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	transition: border-color 0.2s ease;
+}
+
+.lista-produtos:hover {
+	border-color: var(--text-muted, #9ca3af);
+}
+
+.item-produto {
+	background-color: var(--surface-strong, #f9fafb);
+	border: 1px solid var(--border-soft, #e5e7eb);
+	border-radius: 8px;
+	padding: 0.875rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	cursor: grab;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.item-produto:hover {
+	background-color: var(--surface-base, #ffffff);
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.item-produto:active {
+	cursor: grabbing;
+	transform: scale(0.98);
+	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.nome-produto {
+	font-weight: 500;
+	color: var(--text-base, #1f2937);
+}
+
+.texto-vazio {
+	text-align: center;
+	color: var(--text-muted, #6b7280);
+	margin: auto 0;
+	font-style: italic;
+}
+
+.valor {
+	color: #3b82f6;
+	font-weight: 600;
+	font-size: 0.9375rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+	.listas-container {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+	
+	.lista-produtos {
+		min-height: 200px;
+	}
+
+	.modal-produtos {
+		margin: 0.5rem;
+		max-height: calc(100vh - 1rem);
+		border-radius: 14px;
+	}
+
+	.modal-header {
+		padding: 1rem;
+	}
+
+	.modal-titulo {
+		font-size: 1.1rem;
+	}
+
+	.modal-body {
+		padding: 1rem;
+	}
+
+	.modal-footer {
+		padding: 0.75rem 1rem;
+	}
+
+	.titulo-lista {
+		font-size: 0.9rem;
+	}
+
+	.item-produto {
+		padding: 0.75rem;
+	}
+
+	.nome-produto {
+		font-size: 0.875rem;
+	}
+
+	.valor {
+		font-size: 0.8rem;
+	}
+}

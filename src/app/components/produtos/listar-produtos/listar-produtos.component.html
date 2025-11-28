@@ -1,0 +1,128 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Produtos cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroProdutos" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroProdutos"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite nome do produto ou fornecedor"
+        />
+      </div>
+
+      <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando produtos...</div>
+
+      <!-- Tabela Desktop -->
+      <table
+        class="table text-center align-middle tabela-ordenavel"
+        *ngIf="!carregando && produtosFiltrados.length > 0"
+      >
+        <thead>
+          <tr>
+            <th scope="col" class="col-1"></th>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Fornecedor</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody cdkDropList [cdkDropListData]="produtosFiltrados" (cdkDropListDropped)="aoReordenar($event)">
+          <tr *ngFor="let produto of produtosFiltrados; let i = index; trackBy: trackById" cdkDrag>
+            <td cdkDragHandle title="Arraste para reordenar">
+              <i class="bi bi-list icone-arrastar"></i>
+            </td>
+            <th scope="row">{{ produto.ordem || i + 1 }}</th>
+            <td class="fw-semibold">{{ produto.nome }}</td>
+            <td>{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td>{{ produto.fornecedorNome }}</td>
+            <td>
+              <i class="bi bi-pen edit-icon" (click)="editProduto(produto.id!)" title="Editar"></i>
+              <i class="bi bi-trash mx-2" (click)="deleteProduto(produto.id!)" title="Remover"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Cards Mobile -->
+      <div class="mobile-cards" *ngIf="!carregando && produtosFiltrados.length > 0">
+        <div class="mobile-card" *ngFor="let produto of produtosFiltrados; let i = index">
+          <div class="mobile-card-header">
+            <h3 class="mobile-card-title">{{ produto.nome }}</h3>
+            <span class="mobile-card-badge">#{{ produto.ordem || i + 1 }}</span>
+          </div>
+          <div class="mobile-card-body">
+            <div class="mobile-card-row">
+              <span class="mobile-card-label">Preço</span>
+              <span class="mobile-card-value">{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+            </div>
+            <div class="mobile-card-row">
+              <span class="mobile-card-label">Quantidade</span>
+              <span class="mobile-card-value">{{ produto.quantidade }}</span>
+            </div>
+            <div class="mobile-card-row">
+              <span class="mobile-card-label">Fornecedor</span>
+              <span class="mobile-card-value">{{ produto.fornecedorNome }}</span>
+            </div>
+          </div>
+          <div class="mobile-card-actions">
+            <button type="button" (click)="editProduto(produto.id!)" title="Editar">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button type="button" (click)="mostrarDetalhes(produto)" title="Ver detalhes">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button type="button" (click)="deleteProduto(produto.id!)" title="Remover">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #nenhumProduto>
+        <div class="lista-feedback">
+          Nenhum produto cadastrado.
+        </div>
+      </ng-template>
+
+      <div class="lista-feedback" *ngIf="!carregando && produtosFiltrados.length === 0">
+        Nenhum produto cadastrado.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Detalhes -->
+<ng-container *ngIf="produtoSelecionado as produto">
+    <div class="detalhes-backdrop" (click)="fecharDetalhes()"></div>
+    <div class="detalhes-modal" role="dialog" aria-modal="true" aria-labelledby="detalhesProdutoTitulo" (click)="$event.stopPropagation()">
+        <div class="detalhes-header">
+            <h2 id="detalhesProdutoTitulo" class="detalhes-titulo">Detalhes do produto</h2>
+            <button type="button" class="btn-close" aria-label="Fechar detalhes" (click)="fecharDetalhes()"></button>
+        </div>
+        <div class="detalhes-grid">
+            <div class="detalhe-item">
+                <span class="detalhe-label">Nome</span>
+                <span class="detalhe-valor">{{ produto.nome }}</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-label">Preço</span>
+                <span class="detalhe-valor">{{ produto.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-label">Quantidade</span>
+                <span class="detalhe-valor">{{ produto.quantidade }}</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-label">Fornecedor</span>
+                <span class="detalhe-valor">{{ produto.fornecedorNome }}</span>
+            </div>
+        </div>
+    </div>
+</ng-container>

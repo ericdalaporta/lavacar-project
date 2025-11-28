@@ -1,0 +1,145 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Serviços cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroServicos" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroServicos"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite nome, descrição ou produto vinculado"
+        />
+      </div>
+
+  <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando serviços...</div>
+
+      <ng-container *ngIf="!carregando">
+        <!-- Tabela Desktop -->
+        <table
+          class="table text-center align-middle tabela-ordenavel"
+          *ngIf="servicosFiltrados.length > 0"
+        >
+          <thead>
+            <tr>
+              <th scope="col" class="col-1"></th>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Produtos</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody cdkDropList [cdkDropListData]="servicosFiltrados" (cdkDropListDropped)="aoReordenar($event)">
+            <tr *ngFor="let servico of servicosFiltrados; let i = index; trackBy: trackById" cdkDrag>
+              <td cdkDragHandle title="Arraste para reordenar">
+                <i class="bi bi-list icone-arrastar"></i>
+              </td>
+              <th scope="row">{{ servico.ordem || i + 1 }}</th>
+              <td class="texto-nome">{{ servico.nome }}</td>
+              <td class="descricao-coluna">{{ servico.descricao || '—' }}</td>
+              <td>{{ obterPreco(servico) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+              <td class="produtos-coluna">
+                <div class="produtos-wrapper" *ngIf="servico.produtos.length; else semProdutos">
+                  <span class="pill-badge produtos-badge" *ngFor="let produto of servico.produtos">
+                    {{ produto.nome }}
+                  </span>
+                </div>
+                <ng-template #semProdutos>
+                  <span class="text-muted">Sem produtos vinculados</span>
+                </ng-template>
+              </td>
+              <td class="acoes-coluna">
+                <div class="acoes-wrapper">
+                  <i class="bi bi-pen edit-icon" (click)="editarServico(servico.id)" title="Editar"></i>
+                  <i class="bi bi-trash" (click)="excluirServico(servico.id)" title="Remover"></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Cards Mobile -->
+        <div class="mobile-cards" *ngIf="servicosFiltrados.length > 0">
+          <div class="mobile-card" *ngFor="let servico of servicosFiltrados; let i = index">
+            <div class="mobile-card-header">
+              <h3 class="mobile-card-title">{{ servico.nome }}</h3>
+              <span class="mobile-card-price">{{ obterPreco(servico) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+            </div>
+            <div class="mobile-card-body">
+              <div class="mobile-card-row">
+                <span class="mobile-card-label">#</span>
+                <span class="mobile-card-value">{{ servico.ordem || i + 1 }}</span>
+              </div>
+              <div class="mobile-card-row" *ngIf="servico.descricao">
+                <span class="mobile-card-label">Descrição</span>
+                <span class="mobile-card-value">{{ servico.descricao }}</span>
+              </div>
+              <div class="mobile-card-row">
+                <span class="mobile-card-label">Produtos</span>
+                <span class="mobile-card-value" *ngIf="servico.produtos.length; else semProdutosMobile">
+                  {{ servico.produtos.length }} produto(s)
+                </span>
+                <ng-template #semProdutosMobile>
+                  <span class="mobile-card-value text-muted">Nenhum</span>
+                </ng-template>
+              </div>
+            </div>
+            <div class="mobile-card-actions">
+              <button type="button" (click)="editarServico(servico.id)" title="Editar">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button type="button" (click)="mostrarDetalhes(servico)" title="Ver detalhes">
+                <i class="bi bi-eye"></i>
+              </button>
+              <button type="button" (click)="excluirServico(servico.id)" title="Remover">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lista-feedback" *ngIf="servicosFiltrados.length === 0">
+          Nenhum serviço cadastrado.
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Detalhes -->
+<ng-container *ngIf="servicoSelecionado as servico">
+    <div class="detalhes-backdrop" (click)="fecharDetalhes()"></div>
+    <div class="detalhes-modal" role="dialog" aria-modal="true" aria-labelledby="detalhesServicoTitulo" (click)="$event.stopPropagation()">
+        <div class="detalhes-header">
+            <h2 id="detalhesServicoTitulo" class="detalhes-titulo">Detalhes do serviço</h2>
+            <button type="button" class="btn-close" aria-label="Fechar detalhes" (click)="fecharDetalhes()"></button>
+        </div>
+        <div class="detalhes-grid">
+            <div class="detalhe-item">
+                <span class="detalhe-label">Nome</span>
+                <span class="detalhe-valor">{{ servico.nome }}</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-label">Preço</span>
+                <span class="detalhe-valor">{{ obterPreco(servico) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+            </div>
+        </div>
+        <div class="detalhe-descricao" *ngIf="servico.descricao">
+            <span class="detalhe-label">Descrição</span>
+            <p class="detalhe-texto">{{ servico.descricao }}</p>
+        </div>
+        <div class="detalhe-produtos">
+            <span class="detalhe-label">Produtos vinculados</span>
+            <div class="produtos-lista" *ngIf="servico.produtos.length; else semProdutosModal">
+                <span class="pill-badge" *ngFor="let produto of servico.produtos">{{ produto.nome }}</span>
+            </div>
+            <ng-template #semProdutosModal>
+                <p class="detalhe-texto text-muted">Nenhum produto vinculado.</p>
+            </ng-template>
+        </div>
+    </div>
+</ng-container>

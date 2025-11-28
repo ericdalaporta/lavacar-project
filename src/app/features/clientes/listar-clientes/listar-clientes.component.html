@@ -1,0 +1,55 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Clientes cadastrados</h1>
+
+  <div class="filtro-lista">
+        <label for="filtroClientes" class="form-label fw-semibold">Pesquisar</label>
+        <input
+          type="text"
+          id="filtroClientes"
+          class="form-control"
+          [formControl]="filtro"
+          placeholder="Digite nome, e-mail, telefone ou endereço"
+        />
+      </div>
+
+      <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando clientes...</div>
+
+      <div *ngIf="!carregando && clientes.length === 0" class="lista-feedback">
+        Nenhum cliente cadastrado até o momento.
+      </div>
+
+      <div
+        *ngIf="!carregando && clientes.length > 0 && clientesFiltrados.length === 0"
+        class="lista-feedback"
+      >
+        Nenhum cliente encontrado para a pesquisa.
+      </div>
+
+      <div class="row g-4 justify-content-center" *ngIf="!carregando && clientesFiltrados.length > 0">
+        <div class="col-12 col-lg-6" *ngFor="let cliente of clientesFiltrados; trackBy: trackById">
+          <article class="user-card">
+            <div class="user-card-img">
+              <img [src]="cliente.foto || fotoPadrao" alt="Foto de {{ cliente.nome }}" />
+            </div>
+            <div class="user-card-info">
+              <h2>{{ cliente.nome }}</h2>
+              <p><span>Email:</span> {{ cliente.email }}</p>
+              <p><span>Telefone:</span> {{ cliente.telefone }}</p>
+              <p><span>Endereço:</span> {{ cliente.endereco }}</p>
+              <div class="user-card-actions">
+                <button type="button" (click)="editarCliente(cliente.id)" title="Editar cliente">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button type="button" (click)="removerCliente(cliente.id)" title="Remover cliente">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

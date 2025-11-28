@@ -1,0 +1,120 @@
+<div class="container py-4">
+    <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xxl-8 list-page">
+            <h1 class="titulo-lista text-center">Fornecedores cadastrados</h1>
+
+            <div class="filtro-lista">
+                <label for="filtro" class="form-label fw-semibold">Pesquisar</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="filtro"
+                    [formControl]="filtro"
+                    placeholder="Digite nome, CNPJ ou telefone"
+                />
+            </div>
+
+            <div *ngIf="carregando" class="lista-feedback lista-feedback--info">Carregando fornecedores...</div>
+
+            <ng-container *ngIf="!carregando">
+                <!-- Tabela Desktop -->
+                <table
+                    class="table text-center align-middle tabela-ordenavel"
+                    *ngIf="fornecedoresFiltrados.length > 0"
+                >
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-1"></th>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">CNPJ</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody cdkDropList [cdkDropListData]="fornecedoresFiltrados" (cdkDropListDropped)="aoReordenar($event)">
+                        <tr *ngFor="let fornecedor of fornecedoresFiltrados; let i = index; trackBy: trackById" cdkDrag>
+                            <td cdkDragHandle title="Arraste para reordenar">
+                                <i class="bi bi-list icone-arrastar"></i>
+                            </td>
+                            <th scope="row">{{ fornecedor.ordem || i + 1 }}</th>
+                            <td class="fw-semibold">{{ fornecedor.nome }}</td>
+                            <td>{{ fornecedor.cnpj }}</td>
+                            <td>{{ fornecedor.fone }}</td>
+                            <td>
+                                <i class="bi bi-pen edit-icon" (click)="editFornecedor(fornecedor.id!)" title="Editar"></i>
+                                <i class="bi bi-trash mx-2" (click)="deleteFornecedor(fornecedor.id!)" title="Remover"></i>
+                                <i class="bi bi-eye" (click)="viewProdutosFornecedor(fornecedor.id!)" title="Ver produtos"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Cards Mobile -->
+                <div class="mobile-cards" *ngIf="fornecedoresFiltrados.length > 0">
+                    <div class="mobile-card" *ngFor="let fornecedor of fornecedoresFiltrados; let i = index">
+                        <div class="mobile-card-header">
+                            <h3 class="mobile-card-title">{{ fornecedor.nome }}</h3>
+                            <span class="mobile-card-badge">#{{ fornecedor.ordem || i + 1 }}</span>
+                        </div>
+                        <div class="mobile-card-body">
+                            <div class="mobile-card-row">
+                                <span class="mobile-card-label">CNPJ</span>
+                                <span class="mobile-card-value">{{ fornecedor.cnpj }}</span>
+                            </div>
+                            <div class="mobile-card-row">
+                                <span class="mobile-card-label">Telefone</span>
+                                <span class="mobile-card-value">{{ fornecedor.fone }}</span>
+                            </div>
+                        </div>
+                        <div class="mobile-card-actions">
+                            <button type="button" (click)="editFornecedor(fornecedor.id!)" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" (click)="mostrarDetalhes(fornecedor)" title="Ver detalhes">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" (click)="deleteFornecedor(fornecedor.id!)" title="Remover">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lista-feedback" *ngIf="fornecedoresFiltrados.length === 0">
+                    Nenhum fornecedor cadastrado.
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Detalhes -->
+<ng-container *ngIf="fornecedorSelecionado as fornecedor">
+    <div class="detalhes-backdrop" (click)="fecharDetalhes()"></div>
+    <div class="detalhes-modal" role="dialog" aria-modal="true" aria-labelledby="detalhesFornecedorTitulo" (click)="$event.stopPropagation()">
+        <div class="detalhes-header">
+            <h2 id="detalhesFornecedorTitulo" class="detalhes-titulo">Detalhes do fornecedor</h2>
+            <button type="button" class="btn-close" aria-label="Fechar detalhes" (click)="fecharDetalhes()"></button>
+        </div>
+        <div class="detalhes-grid">
+            <div class="detalhe-item">
+                <span class="detalhe-label">Nome</span>
+                <span class="detalhe-valor">{{ fornecedor.nome }}</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-label">CNPJ</span>
+                <span class="detalhe-valor">{{ fornecedor.cnpj }}</span>
+            </div>
+            <div class="detalhe-item">
+                <span class="detalhe-label">Telefone</span>
+                <span class="detalhe-valor">{{ fornecedor.fone }}</span>
+            </div>
+        </div>
+        <div class="detalhes-acoes">
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="fecharDetalhes(); viewProdutosFornecedor(fornecedor.id!)">
+                <i class="bi bi-box-seam me-1"></i> Ver produtos
+            </button>
+        </div>
+    </div>
+</ng-container>

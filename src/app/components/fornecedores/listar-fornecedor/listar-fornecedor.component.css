@@ -1,0 +1,111 @@
+.detalhes-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+}
+
+.detalhes-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 520px);
+  background: var(--surface-base, #ffffff);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.18);
+  padding: clamp(1.5rem, 4vw, 2rem);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.detalhes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.detalhes-titulo {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.detalhes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.detalhe-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detalhe-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #6b7280);
+}
+
+.detalhe-valor {
+  font-weight: 600;
+  color: var(--text-base, #1f2937);
+}
+
+.detalhes-acoes {
+  border-top: 1px solid var(--border-soft, #e5e7eb);
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 575.98px) {
+  .detalhes-modal {
+    width: calc(100vw - 1rem);
+    max-height: calc(100vh - 2rem);
+    padding: 1.25rem;
+    border-radius: 14px;
+    overflow-y: auto;
+  }
+
+  .detalhes-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .detalhes-titulo {
+    font-size: 1.1rem;
+  }
+
+  .detalhes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .detalhe-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-soft, #e5e7eb);
+  }
+
+  .detalhe-item:last-child {
+    border-bottom: none;
+  }
+
+  .detalhe-label {
+    font-size: 0.8rem;
+  }
+
+  .detalhe-valor {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+}

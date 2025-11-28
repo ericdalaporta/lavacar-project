@@ -1,0 +1,94 @@
+<section class="cadastro-page cadastro-page--compact">
+  <div class="card cadastro-card">
+    <h1 class="cadastro-titulo">{{ tituloPagina }}</h1>
+    <form [formGroup]="formCliente" (ngSubmit)="salvarCliente()" novalidate class="cadastro-form cadastro-form--compact-grid">
+      <div>
+        <label class="form-label" for="nome">Nome do Cliente</label>
+        <input
+          id="nome"
+          type="text"
+          class="form-control"
+          formControlName="nome"
+          placeholder="Cliente 1"
+          [ngClass]="{
+            'is-valid': obterControle('nome')?.valid && (obterControle('nome')?.dirty || obterControle('nome')?.touched),
+            'is-invalid': obterControle('nome')?.invalid && (obterControle('nome')?.dirty || obterControle('nome')?.touched)
+          }"
+        />
+        <div class="text-danger pequeno" *ngIf="obterControle('nome')?.invalid && (obterControle('nome')?.dirty || obterControle('nome')?.touched)">
+          Informe um nome com pelo menos 3 caracteres.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="telefone">Telefone</label>
+        <input
+          id="telefone"
+          type="tel"
+          class="form-control"
+          formControlName="telefone"
+          placeholder="55999999999"
+          [ngClass]="{
+            'is-valid': obterControle('telefone')?.valid && (obterControle('telefone')?.dirty || obterControle('telefone')?.touched),
+            'is-invalid': obterControle('telefone')?.invalid && (obterControle('telefone')?.dirty || obterControle('telefone')?.touched)
+          }"
+        />
+        <div class="text-danger pequeno" *ngIf="obterControle('telefone')?.invalid && (obterControle('telefone')?.dirty || obterControle('telefone')?.touched)">
+          <span *ngIf="obterControle('telefone')?.errors?.['required']">Telefone é obrigatório.</span>
+          <span *ngIf="obterControle('telefone')?.errors?.['pattern']">Telefone deve ter 11 dígitos ou estar no formato (XX) XXXX(X)-XXXX.</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="cliente@email.com"
+          [ngClass]="{
+            'is-valid': obterControle('email')?.valid && (obterControle('email')?.dirty || obterControle('email')?.touched),
+            'is-invalid': obterControle('email')?.invalid && (obterControle('email')?.dirty || obterControle('email')?.touched)
+          }"
+        />
+        <div class="text-danger pequeno" *ngIf="obterControle('email')?.invalid && (obterControle('email')?.dirty || obterControle('email')?.touched)">
+          Informe um e-mail válido.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="endereco">Endereço</label>
+        <input
+          id="endereco"
+          type="text"
+          class="form-control"
+          formControlName="endereco"
+          placeholder="Rua/Avenida, número, bairro"
+          [ngClass]="{
+            'is-valid': obterControle('endereco')?.valid && (obterControle('endereco')?.dirty || obterControle('endereco')?.touched),
+            'is-invalid': obterControle('endereco')?.invalid && (obterControle('endereco')?.dirty || obterControle('endereco')?.touched)
+          }"
+        />
+        <div class="text-danger pequeno" *ngIf="obterControle('endereco')?.invalid && (obterControle('endereco')?.dirty || obterControle('endereco')?.touched)">
+          Informe um endereço válido.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="foto">Foto</label>
+        <input id="foto" type="file" class="form-control" accept="image/*" (change)="aoSelecionarFoto($event)" />
+      </div>
+
+      <div class="upload-status text-success" *ngIf="fotoCarregada">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Foto carregada com sucesso.</span>
+      </div>
+
+      <div class="cadastro-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="formCliente.invalid">Salvar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="limparFormulario()">Limpar</button>
+      </div>
+    </form>
+  </div>
+</section>

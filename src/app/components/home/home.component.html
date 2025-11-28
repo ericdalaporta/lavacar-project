@@ -1,0 +1,45 @@
+<div class="home-container">
+  <section class="home-hero">
+    <div class="container text-center">
+      <h1 class="home-hero__title">LavaCar</h1>
+      <p class="home-hero__subtitle">Sistema de agendamentos e gestão de serviços automotivos</p>
+    </div>
+  </section>
+
+  <section class="slider-area" aria-label="Destaques sobre o uso do LavaCar">
+    <div class="blog-slider" 
+         (wheel)="aoRolar($event)" 
+         (touchstart)="aoIniciarToque($event)" 
+         (touchend)="aoFinalizarToque($event)"
+         tabindex="0">
+      <div class="blog-slider__wrp">
+        <article
+          *ngFor="let slide of slides; index as i"
+          class="blog-slider__item"
+          [class.blog-slider__item--active]="i === ativo"
+          [attr.aria-hidden]="i === ativo ? 'false' : 'true'"
+        >
+          <div class="blog-slider__img">
+            <img [src]="slide.imagem" [alt]="slide.titulo" />
+          </div>
+          <div class="blog-slider__content">
+            <span class="blog-slider__code">{{ slide.etapa }}</span>
+            <h3 class="blog-slider__title">{{ slide.titulo }}</h3>
+            <p class="blog-slider__text">{{ slide.descricao }}</p>
+          </div>
+        </article>
+      </div>
+      <div class="blog-slider__pagination" role="tablist" aria-label="Navegação dos destaques">
+        <button
+          type="button"
+          *ngFor="let slide of slides; index as i"
+          class="blog-slider__bullet"
+          [class.blog-slider__bullet--active]="i === ativo"
+          (click)="selecionarSlide(i)"
+          [attr.aria-label]="'Ir para ' + slide.titulo"
+          [attr.aria-selected]="i === ativo"
+        ></button>
+      </div>
+    </div>
+  </section>
+</div>

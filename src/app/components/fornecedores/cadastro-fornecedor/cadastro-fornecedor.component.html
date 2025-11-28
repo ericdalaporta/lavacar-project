@@ -1,0 +1,63 @@
+<section class="cadastro-page cadastro-page--compact">
+  <div class="card cadastro-card">
+    <h1 class="cadastro-titulo">{{ fornecedorId ? 'Editar Fornecedor' : 'Cadastrar Fornecedor' }}</h1>
+    <form [formGroup]="formFornecedor" (ngSubmit)="addFornecedor()" class="cadastro-form">
+      <div>
+        <label for="nome" class="form-label">Nome do Fornecedor</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nome"
+          formControlName="nome"
+          placeholder="Ex: Fornecedor ABC"
+          required
+          [ngClass]="{'is-invalid': formControls.nome.invalid && (formControls.nome.touched || formControls.nome.dirty)}"
+        />
+        <div *ngIf="formControls.nome.invalid && (formControls.nome.touched || formControls.nome.dirty)" class="text-danger pequeno">
+          <span *ngIf="formControls.nome.errors?.['required']">Nome é obrigatório.</span>
+          <span *ngIf="formControls.nome.errors?.['minlength']">Nome deve ter pelo menos 3 caracteres.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="cnpj" class="form-label">CNPJ</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cnpj"
+          formControlName="cnpj"
+          placeholder="Ex: 00.000.000/0000-00"
+          (input)="formatarCNPJ($event)"
+          required
+          [ngClass]="{'is-invalid': formControls.cnpj.invalid && (formControls.cnpj.touched || formControls.cnpj.dirty)}"
+        />
+        <div *ngIf="formControls.cnpj.invalid && (formControls.cnpj.touched || formControls.cnpj.dirty)" class="text-danger pequeno">
+          <span *ngIf="formControls.cnpj.errors?.['required']">CNPJ é obrigatório.</span>
+          <span *ngIf="formControls.cnpj.errors?.['pattern']">CNPJ deve estar no formato 00.000.000/0000-00.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="fone" class="form-label">Telefone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fone"
+          formControlName="fone"
+          placeholder="Ex: (11) 99999-9999"
+          required
+          [ngClass]="{'is-invalid': formControls.fone.invalid && (formControls.fone.touched || formControls.fone.dirty)}"
+        />
+        <div *ngIf="formControls.fone.invalid && (formControls.fone.touched || formControls.fone.dirty)" class="text-danger pequeno">
+          <span *ngIf="formControls.fone.errors?.['required']">Telefone é obrigatório.</span>
+          <span *ngIf="formControls.fone.errors?.['pattern']">Telefone deve estar no formato (99) 99999-9999.</span>
+        </div>
+      </div>
+
+      <div class="cadastro-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="formFornecedor.invalid">Salvar</button>
+        <button type="reset" class="btn btn-outline-danger">Limpar</button>
+      </div>
+    </form>
+  </div>
+</section>

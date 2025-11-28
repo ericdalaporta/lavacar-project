@@ -1,0 +1,72 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+  <div class="col-12 col-lg-10 col-xxl-8 list-page">
+      <h1 class="titulo-lista text-center">Serviços cadastrados</h1>
+
+      <!-- Tabela Desktop -->
+      <table class="table text-center align-middle tabela-ordenavel" *ngIf="servicos.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servico of servicos; trackBy: trackById">
+          <th scope="row">{{ servico.id }}</th>
+          <td>{{ servico.nome }}</td>
+          <td>{{ servico.descricao }}</td>
+          <td>{{ servico.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          <td>
+            <i
+              class="bi bi-pen edit-icon"
+              (click)="editarServico(servico.id!)"
+              title="Editar"
+            ></i>
+            <i
+              class="bi bi-trash mx-2"
+              (click)="excluirServico(servico.id!)"
+              title="Excluir"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+
+      <!-- Cards Mobile -->
+      <div class="mobile-cards" *ngIf="servicos.length > 0">
+        <div class="mobile-card" *ngFor="let servico of servicos">
+          <div class="mobile-card-header">
+            <h3 class="mobile-card-title">{{ servico.nome }}</h3>
+            <span class="mobile-card-badge">#{{ servico.id }}</span>
+          </div>
+          <div class="mobile-card-body">
+            <div class="mobile-card-row" *ngIf="servico.descricao">
+              <span class="mobile-card-label">Descrição</span>
+              <span class="mobile-card-value">{{ servico.descricao }}</span>
+            </div>
+            <div class="mobile-card-row">
+              <span class="mobile-card-label">Preço</span>
+              <span class="mobile-card-value">{{ servico.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+            </div>
+          </div>
+          <div class="mobile-card-actions">
+            <button type="button" (click)="editarServico(servico.id!)" title="Editar">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button type="button" (click)="excluirServico(servico.id!)" title="Excluir">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lista-feedback" *ngIf="servicos.length === 0">
+        Nenhum serviço cadastrado.
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<section class="cadastro-page cadastro-page--compact">
+  <div class="card cadastro-card cadastro-card--medium">
+    <h1 class="cadastro-titulo">{{ tituloPagina }}</h1>
+    <form [formGroup]="formFuncionario" (ngSubmit)="salvarFuncionario()" novalidate class="cadastro-form cadastro-form--compact-grid">
+      <div>
+        <label class="form-label" for="nome">Nome completo</label>
+        <input id="nome" type="text" class="form-control" formControlName="nome" placeholder="Digite o nome" />
+        <div class="text-danger pequeno" *ngIf="obterControle('nome')?.invalid && (obterControle('nome')?.dirty || obterControle('nome')?.touched)">
+          Informe um nome válido com pelo menos 3 caracteres.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="funcao">Função</label>
+        <input id="funcao" type="text" class="form-control" formControlName="funcao" placeholder="Função exercida" />
+        <div class="text-danger pequeno" *ngIf="obterControle('funcao')?.invalid && (obterControle('funcao')?.dirty || obterControle('funcao')?.touched)">
+          Informe a função do funcionário.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="telefone">Telefone</label>
+        <input id="telefone" type="text" class="form-control" formControlName="telefone" placeholder="(00) 00000-0000" />
+        <div class="text-danger pequeno" *ngIf="obterControle('telefone')?.invalid && (obterControle('telefone')?.dirty || obterControle('telefone')?.touched)">
+          <span *ngIf="obterControle('telefone')?.errors?.['required']">Telefone é obrigatório.</span>
+          <span *ngIf="obterControle('telefone')?.errors?.['pattern']">Telefone deve ter 11 dígitos ou estar no formato (XX) XXXX(X)-XXXX.</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="email">E-mail</label>
+        <input id="email" type="email" class="form-control" formControlName="email" placeholder="nome@empresa.com" />
+        <div class="text-danger pequeno" *ngIf="obterControle('email')?.invalid && (obterControle('email')?.dirty || obterControle('email')?.touched)">
+          Informe um e-mail válido.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="dataAdmissao">Data de admissão</label>
+        <input id="dataAdmissao" type="date" class="form-control input-dark-icon" formControlName="dataAdmissao" />
+        <div class="text-danger pequeno" *ngIf="obterControle('dataAdmissao')?.invalid && (obterControle('dataAdmissao')?.dirty || obterControle('dataAdmissao')?.touched)">
+          Informe a data de admissão.
+        </div>
+      </div>
+
+      <div>
+        <label class="form-label" for="foto">Foto</label>
+        <input id="foto" type="file" class="form-control" accept="image/*" (change)="aoSelecionarFoto($event)" />
+        <div class="form-text">Escolha uma imagem ou deixe vazio para usar o avatar padrão.</div>
+      </div>
+
+      <div class="upload-status text-success" *ngIf="fotoCarregada">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Foto carregada com sucesso.</span>
+      </div>
+
+      <div class="cadastro-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="formFuncionario.invalid">Salvar</button>
+        <button type="button" class="btn btn-outline-danger" (click)="limparFormulario()">Limpar</button>
+      </div>
+    </form>
+  </div>
+</section>
